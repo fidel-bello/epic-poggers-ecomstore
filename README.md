@@ -5,7 +5,7 @@
    * [Description](#Description)
    * [Github-Practices](#Github-Practices)
    * [Installation](#Installation)
-   * [Dependancies](#Dependencies)
+   * [Dependencies](#Dependencies)
    * [license](#License)
    * [Contributing](#Contributing)
    * [Test](#Test)
