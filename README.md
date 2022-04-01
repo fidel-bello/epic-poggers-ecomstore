@@ -16,11 +16,15 @@
    * The idea so far is to use the paypal sandbox api to mimick a checkout and buy scenerio.
    * This app will use REST apis to call actions from the back end to the front-end
    * At the moment, the application will use React for the front-end. And Flask for the back-end
+   * There is no deadline for this project. I started this project for practice and contributions as a group. But this project will be finished.
 
    ## Github-Practices
    * Please refrain from committing, pushing, making any type of changes from the main branch. Github asks for payments when setting up branch protection so this project will not have it. If this happens, the main branch will have changes and if the changes are buggy, then it could cause alot of bugs to the app. If you would like to make a change, make a different branch and push it up, then make a pull request.
    * Also, Please do not merge your own pull request. Let someone else review and merge your code.
    * If you would like to push up code.. make sure as well you " git add . and git commit -m from the main repo"
+   * If you find a bug, please create an issue
+   * If you would like to start on something new please create an issue and assign to yourself, you can close issue when the task is finished
+   * I have made some sample issues at the moment.. but are not assigned. Please add your comments and discuss the issues if you find a better way to do something. I am open to learning!
 
    ## Dependencies
    * React.js, Flask
