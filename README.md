@@ -3,7 +3,7 @@
 
    ## Table of Contents
    * [Description](#Description)
-   * [Github-Practices] (#Github-Practices)
+   * [Github-Practices](#Github-Practices)
    * [Installation](#Installation)
    * [Usage](#Usage)
    * [license](#License)
