@@ -5,7 +5,6 @@
    * [Description](#Description)
    * [Github-Practices](#Github-Practices)
    * [Installation](#Installation)
-   * [Usage](#Usage)
    * [license](#License)
    * [Contributing](#Contributing)
    * [Test](#Test)
@@ -21,13 +20,12 @@
    ## Github-Practices
    * Please refrain from committing, pushing, making any type of changes from the main branch. Github asks for payments when setting up branch protection so this project will not have it. If this happens, the main branch will have changes and if the changes are buggy, then it could cause alot of bugs to the app. If you would like to make a change, make a different branch and push it up, then make a pull request.
    * Also, Please do not merge your own pull request. Let someone else review and merge your code.
+   * If you would like to push up code.. make sure as well you " git add . and git commit -m from the main repo"
 
    
    ## Installation
-   * react-js  python-flask for now 
-
-   ## Usage 
-   * through web 
+   * if you would like to make changes or have the project for your own practice, simply copy the url or ssh from the top and " git clone " to your desktop or repo
+   * make sure you  " npm install " all dependancies for the project
 
    ## License
    * ![badge](https://img.shields.io/badge/license-MIT-blue)
@@ -35,12 +33,13 @@
 
    ## Contributing
    * fidel-bello
+   * so far I am the only contributer but if you contribute I can add your github username here or you can add it as well!
 
    ## Test
    * jest
 
    ## Questions
-   * issues at github or emial me
+   * issues at github or emaill me
    * My github is: [fidel-bello](https://github.com/fidel-bello)
    * Email me with questions: fidelbello1997@gmail.com
 
