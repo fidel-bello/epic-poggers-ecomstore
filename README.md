@@ -3,6 +3,7 @@
 
    ## Table of Contents
    * [Description](#Description)
+   * [Github-Practices] (#Github-Practices)
    * [Installation](#Installation)
    * [Usage](#Usage)
    * [license](#License)
@@ -16,6 +17,12 @@
    * This app will use REST apis to call actions from the back end to the front-end
    * At the moment, the application will use React for the front-end. And Flask for the back-end
 
+
+   ## Github-Practices
+   * Please refrain from committing, pushing, making any type of changes from the main branch. Github asks for payments when setting up branch protection so this project will not have it. If this happens, the main branch will have changes and if the changes are buggy, then it could cause alot of bugs to the app. If you would like to make a change, make a different branch and push it up, then make a pull request.
+   * Also, Please do not merge your own pull request. Let someone else review and merge your code.
+
+   
    ## Installation
    * react-js  python-flask for now 
 
