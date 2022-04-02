@@ -43,6 +43,7 @@
    * riboney
    * balliam
    * andromedamoon-stack
+   * PatrickBruso
    * If you contribute we can add your github username here or you can add it as well!
 
    ## Test
