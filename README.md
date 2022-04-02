@@ -40,7 +40,10 @@
 
    ## Contributing
    * fidel-bello
-   * so far I am the only contributer but if you contribute I can add your github username here or you can add it as well!
+   * riboney
+   * balliam
+   * andromedamoon-stack
+   * If you contribute we can add your github username here or you can add it as well!
 
    ## Test
    * jest will be used to test the front end
