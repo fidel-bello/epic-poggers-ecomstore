@@ -6,3 +6,19 @@
 
 
 ## Directories
+* src will have all the directiories
+* actions/
+* components/
+* constants/
+* reducers/
+  
+## actions
+* authActions
+* cartActions
+* productActions
+  
+## components
+* layouts/ Header.js. Footer.js
+* products/
+* route/
+* user/
