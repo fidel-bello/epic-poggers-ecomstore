@@ -45,7 +45,6 @@
    * andromedamoon-stack
    * PatrickBruso
    * nmp14
-   * If you contribute we can add your github username here or you can add it as well!
 
    ## Test
    * jest will be used to test the front end
