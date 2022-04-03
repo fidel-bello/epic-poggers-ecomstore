@@ -3,8 +3,21 @@
 * Switch cases - one space
 * member expresions - pne space
 * strings will be single quotes, except jsx rules which are double quotes
+  
+## Starting server
+* will have to install packages with npm install
+* npm run build
+* npm start
+* server should run
+* will make scripts to do it concurrently
 
-
+## Directories
+* everything will be in the Src/App directory
+  ## Typescript Rules 
+* indent no more then two spaces -- will cause errors
+* Switch cases - one space
+* member expresions - pne space
+* strings will be single quotes, except jsx rules which are double quotes
 
 ## Starting server
 * will have to install packages with npm install
@@ -15,3 +28,36 @@
 
 ## Directories
 * everything will be in the Src/App directory
+* Config
+* Controllers
+* middlewares
+* models
+* routes
+* utils
+
+-- what will the directories contain? --
+
+## Config
+* database file
+* the connection function,, connection strings or passwords will be contained in a hidden env so it doesn't push up to github repo
+
+## Controllers
+* This will contain all requests
+* authcontroller
+* ordercontroller
+* productcontrollers
+
+## models
+* we will have models here
+* user
+* product
+* orders
+
+## routes
+* routes will be put here
+* auth
+* products
+* orders
+
+## utils
+* extra features can be put here
