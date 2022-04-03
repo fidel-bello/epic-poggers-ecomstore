@@ -12,10 +12,10 @@
    * [Questions](#Questions)
    
    ## Description
-   * This web app will be e-commerce mock app that will allow users to select, buy, review, filter, items from a fictional store.
-   * The idea so far is to use the paypal sandbox api to mimick a checkout and buy scenerio.
+   * This web app will be e-commerce mock app that will allow users to select, buy, review, filter items from a fictional store.
+   * The idea so far is to use the paypal sandbox api to mimic a checkout and buy scenerio.
    * This app will use REST apis to call actions from the back end to the front-end
-   * At the moment, the application will use React for the front-end. And Flask for the back-end
+   * The application will use React for the front-end. And Node for the back-end
    * There is no deadline for this project. I started this project for practice and contributions as a group. But this project will be finished.
 
    ## Github-Practices
@@ -27,7 +27,7 @@
    * I have made some sample issues at the moment.. but are not assigned. Please add your comments and discuss the issues if you find a better way to do something. I am open to learning!
 
    ## Dependencies
-   * React.js, Flask
+   * React.js, Node, Sequelize, Typescript
    * future dependencies will be posted here with better format.
 
    ## Installation
@@ -44,6 +44,7 @@
    * balliam
    * andromedamoon-stack
    * PatrickBruso
+   * nmp14
    * If you contribute we can add your github username here or you can add it as well!
 
    ## Test
