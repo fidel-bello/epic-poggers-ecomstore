@@ -6,8 +6,7 @@ const app = express();
 const PORT = process.env.PORT || 3006;
 
 export async function main() {
-  
-  app.listen(() => {
+  app.listen(PORT, () => {
     console.log(`Listening on port ${PORT}`);
   });
 
@@ -17,4 +16,4 @@ export async function main() {
   } catch (error) {
     console.error('unable to connect:', error)
   }
-}
+};
