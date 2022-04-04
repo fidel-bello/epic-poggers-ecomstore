@@ -9,10 +9,10 @@ Fixes # (issue)
 
 ## Type of Change
 
-- [ ] Refactor (non-breaking change which improves code performance or readability)
+- [x] Refactor (non-breaking change which improves code performance or readability)
 - [ ] Bug-fix (non-breaking change which fixes an issue)
-- [ ] New Feature (non-breaking change that adds functionality)
-- [ ] Documentation (changes to docs and not code)
+- [x] New Feature (non-breaking change that adds functionality)
+- [x] Documentation (changes to docs and not code)
 - [ ] Breaking Change (Fix or change that would cause existing functionality to not work as expected)
 - [ ] Test
 
@@ -23,15 +23,15 @@ Enter description of testing
 
 - [ ] Unit Test
 - [ ] Manual / Postman(if backend)
-- [ ] Integration
+- [x] Integration
 
 ## Affirmations
 
-- [ ] I follow coding guidelines (TBD)
-- [ ] I have self-reviewed my code
-- [ ] I have run eslint and fixes issues (Mostly works but needs more rules and a fix)
+- [x] I follow coding guidelines (TBD)
+- [x] I have self-reviewed my code
+- [x] I have run eslint and fixes issues (Mostly works but needs more rules and a fix)
 - [ ] I have commented code when necessary or difficult
 - [ ] I have made changes to docs where required
-- [ ] My changes generate no new warnings
+- [x] My changes generate no new warnings
 - [ ] I have added tests
 - [ ] New and existing tests pass
