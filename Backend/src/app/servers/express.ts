@@ -19,6 +19,7 @@ export class HttpServer {
   constructor(port: string, router: express.Router) {
     this._port = port;
     this._router = router;
+    this.useRouter();
   }
 
   public set port(port: string) {
