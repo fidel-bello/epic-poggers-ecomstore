@@ -1,3 +1,8 @@
-import { Core } from "./app";
+import { HTTP } from "./app";
+import router from "./app/Routes";
 
-Core.main();
+const app = new HTTP.HttpServer();
+
+app.router = router;
+
+app.init();
