@@ -1,4 +1,4 @@
-import express, { Express } from 'express';
+import express from 'express';
 import cors from 'cors';
 // import { Core } from '../framework';
 
@@ -13,10 +13,34 @@ expressApp.use(express.json());
 
 export class HttpServer {
   private app = expressApp;
-  port: string = process.env.PORT || '3006';
+  private _router: express.Router;
+  private _port: string;
+
+  constructor(port: string, router: express.Router) {
+    this._port = port;
+    this._router = router;
+    this.useRouter();
+  }
+
+  public set port(port: string) {
+    this._port = port;
+  }
+
+  public get port(): string {
+    return this._port;
+  }
   
   public set router(router: express.Router) {
-    this.app.use(router);
+    this._router = router;
+    this.useRouter();
+  }
+
+  public get router(): express.Router {
+    return this._router;
+  }
+
+  private useRouter() {
+    this.app.use(this._router);
   }
 
   public init() {

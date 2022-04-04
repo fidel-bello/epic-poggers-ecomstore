@@ -9,7 +9,7 @@ Fixes # (issue)
 
 ## Type of Change
 
-- [ ] Refactor (non-breaking change whcih improves code performance or readability)
+- [ ] Refactor (non-breaking change which improves code performance or readability)
 - [ ] Bug-fix (non-breaking change which fixes an issue)
 - [ ] New Feature (non-breaking change that adds functionality)
 - [ ] Documentation (changes to docs and not code)
@@ -17,7 +17,7 @@ Fixes # (issue)
 - [ ] Test
 
 
-## How it was test
+## How it was tested
 
 Enter description of testing
 
