@@ -4,6 +4,7 @@
 * member expresions - pne space
 * strings will be single quotes, except jsx rules which are double quotes
 
+## Logo
 
 ## Directories
 * src will have all the directiories
