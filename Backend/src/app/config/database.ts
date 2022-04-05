@@ -1,17 +1,26 @@
 import mongoose from 'mongoose';
-import config from 'config';
 
 export class Database
 {
-    private URL: string = config.get('URI');
+    private URL: string;
 
-    constructor(){
-        this.URL =this.URL;
+    constructor(url: string){
+        this.URL = url;
     }
+
+    public set url(url: string) {
+        this.URL = url;
+    }
+
+    public get url(): string {
+        return this.URL;
+    }
+
+    
 
     public async connectionMongo(): Promise<void>{
         try {
-            await mongoose.connect(this.URL);
+            await mongoose.connect(this.URL) 
             console.log('Connection Succesfull');
         } catch (error) {
             console.error(error);
