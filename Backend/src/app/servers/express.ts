@@ -1,17 +1,16 @@
 import express from 'express';
 import cors from 'cors';
-import { Database } from '../config/database';
+
+
 
 // import { Core } from '../framework';
 
 // Core.App = Core.Application.ApplicationCreate({appName: 'ecom'});
 // const { App } = Core;
-const mongoDb = new Database();
 const expressApp = express();
 expressApp.use(cors());
 expressApp.use(express.urlencoded({extended: true}));
 expressApp.use(express.json());
-mongoDb.connectionMongo();
 
 export class HttpServer {
   private app = expressApp;
