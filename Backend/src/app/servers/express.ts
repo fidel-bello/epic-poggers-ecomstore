@@ -1,21 +1,19 @@
 import express from 'express';
 import cors from 'cors';
-import { connectDB } from '../config/database';
+
+
+
 // import { Core } from '../framework';
 
 // Core.App = Core.Application.ApplicationCreate({appName: 'ecom'});
 // const { App } = Core;
-
 const expressApp = express();
-const connectionDb = connectDB();
-
 expressApp.use(cors());
 expressApp.use(express.urlencoded({extended: true}));
 expressApp.use(express.json());
 
 export class HttpServer {
   private app = expressApp;
-  private connection = connectionDb;
   private _router: express.Router;
   private _port: string;
 
@@ -49,7 +47,6 @@ export class HttpServer {
 
 
   public init() {
-    this.connection;
     this.app.listen(this.port, () => {
       console.log(`Listening on port ${this.port}\n`);
     })
