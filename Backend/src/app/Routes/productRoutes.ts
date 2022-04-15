@@ -6,6 +6,9 @@ const Product = new Product_Controllers();
 
 router.route('/products').get(Product.getProducts);
 router.route('/products/:id').get(Product.getSingleProduct);
-router.route('/products/new').post(Product.createProducts);
+
+//admin routes
+router.route('/admin/products/:id').put(Product.updateProduct);
+router.route('/admin/products/new').post(Product.createProducts);
 
 export default router

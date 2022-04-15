@@ -11,8 +11,8 @@ export class Product_Controllers
         })
     };
 
-    //get_products 
-    public getProducts = async(req:any, res:any, next:any): Promise<void> => {
+
+    public getProducts = async(req:any, res:any, next:any): Promise<void> => {    //get_products 
 
         const products = await Product.find();
 
@@ -23,8 +23,8 @@ export class Product_Controllers
         })
     };
 
-    //get single product with id assigned by mongoose
-    public getSingleProduct = async (req:any, res:any, next:any): Promise<void> => {
+    
+    public getSingleProduct = async (req:any, res:any, next:any): Promise<void> => { //get single product with id assigned by mongoose
         
         const product = await Product.findById(req.params.id);
 
@@ -38,6 +38,28 @@ export class Product_Controllers
             success: true,
             product
         })
+    }
+
+    public updateProduct = async(req:any, res:any, next:any): Promise<void> => {
+
+        let product = await Product.findById(req.params.id);
+
+        if(!product)
+            return res.status(404).json({
+                success: false,
+                message: 'Product not found'
+            })
+
+        product = await Product.findByIdAndUpdate(req.params.id, req.body, {
+            new: true,
+            runValidators: true,
+        });
+
+        res.status(200).json({
+            success: true,
+            product,
+        })
+
     }
 
 }
