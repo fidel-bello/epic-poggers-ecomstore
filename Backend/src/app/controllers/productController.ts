@@ -13,9 +13,13 @@ export class Product_Controllers
 
     //get_products 
     public getProducts = async(req:any, res:any, next:any) => {
-        res.status(201).json({
+
+        const products = await Product.find();
+        
+        res.status(200).json({
             success: true,
-            msg: 'Products will be found here'
+            count: products.length,
+            products
         })
     };
 
