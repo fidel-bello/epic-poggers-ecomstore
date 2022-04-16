@@ -17,7 +17,6 @@ export class Database
     }
 
     
-
     public async connectionMongo(): Promise<void>{
         try {
             await mongoose.connect(this.URL) 

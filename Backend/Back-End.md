@@ -11,6 +11,13 @@
 * server should run
 * will make scripts to do it concurrently
 
+## Formatting
+* Classes will be snake cased with capital letters
+* functions and methods will be camel cased
+* variables will be snake cased with lowercase letters
+
+## Tests
+* before pushing make sure API's are working with POSTMAN or other platform for API testing. 
 
 ## Directories
 * everything will be in the Src/App directory
