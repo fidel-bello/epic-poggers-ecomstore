@@ -66,7 +66,7 @@ export class Product_Controllers
 
 
     
-    public deleteProduct = async(req:any, res:any, next:any) => {
+    public deleteProduct = async(req:any, res:any, next:any): Promise<void> => {
         try {
             const product = await Product.findByIdAndRemove(req.params.id);
 
