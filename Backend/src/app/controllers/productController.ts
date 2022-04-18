@@ -1,10 +1,12 @@
 import { Product } from "../models/product";
 
-export class Product_Controllers 
-{
+export class Product_Controllers
+ {
     //create products
     public createProducts = async (req: any, res: any, next: any): Promise<void> => {
-        Product.create(req.body);
+
+        await Product.create(req.body);
+
         res.status(201).json({
             success: true,
             Product
@@ -12,7 +14,7 @@ export class Product_Controllers
     };
 
 
-    public getProducts = async(req:any, res:any, next:any): Promise<void> => {    //get_products 
+    public getProducts = async (req: any, res: any, next: any): Promise<void> => {    //get_products 
 
         const products = await Product.find();
 
@@ -23,12 +25,12 @@ export class Product_Controllers
         })
     };
 
-    
-    public getSingleProduct = async (req:any, res:any, next:any): Promise<void> => { //get single product with id assigned by mongoose
-        
+
+    public getSingleProduct = async (req: any, res: any, next: any): Promise<void> => { //get single product with id assigned by mongoose
+
         const product = await Product.findById(req.params.id);
 
-        if(!product)
+        if (!product)
             return res.status(404).json({
                 success: false,
                 message: 'Product not found'
@@ -40,11 +42,11 @@ export class Product_Controllers
         })
     }
 
-    public updateProduct = async(req:any, res:any, next:any): Promise<void> => {
+    public updateProduct = async (req: any, res: any, next: any): Promise<void> => {
 
         let product = await Product.findById(req.params.id);
 
-        if(!product)
+        if (!product)
             return res.status(404).json({
                 success: false,
                 message: 'Product not found'
@@ -62,4 +64,28 @@ export class Product_Controllers
 
     }
 
+
+    
+    public deleteProduct = async(req:any, res:any, next:any): Promise<void> => {
+        try {
+            const product = await Product.findByIdAndRemove(req.params.id);
+
+            if(!product)
+                return res.status(404).json({
+                    success: false,
+                    message: 'product not found'
+                })
+
+            res.status(200).json({
+                success: true,
+                message: 'product deleted'
+            })
+            
+        } catch (error) {
+            console.error(error);
+        }
+
+    }
+
+   
 }

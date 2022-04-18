@@ -70,32 +70,32 @@ const productSchema = new Schema({
     type: Number,
     default: 0,
   },
-  /* will use after user model is made
+  /*
   reviews: [
     {
       user: {
         type: mongoose.SchemaTypes.ObjectId,
-        ref: 'User',
+        //ref: 'User',
         //required: true,
       },
       name: {
         type: String,
-        required: true,
+        //required: true,
       },
       rating: {
         type: Number,
-        required: true,
+       // required: true,
       },
       comment: {
         type: String,
-        required: true,
+       // required: true,
       },
     },
   ],
   user: {
     type: mongoose.SchemaTypes.ObjectId,
-    ref: 'User',
-    required: true,
+   // ref: 'User',
+    //required: true,
   },
   */
   createdAt: {
