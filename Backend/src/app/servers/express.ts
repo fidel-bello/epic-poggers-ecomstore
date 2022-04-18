@@ -1,5 +1,6 @@
 import express from 'express';
 import cors from 'cors';
+import errors from '../middlewares/errors';
 
 
 
@@ -16,6 +17,7 @@ export class HttpServer {
   private app = expressApp;
   private _router: express.Router;
   private _port: string;
+  private middleware = errors
 
   constructor(port: string, router: express.Router) {
     this._port = port;
@@ -42,9 +44,8 @@ export class HttpServer {
 
   private useRouter() {
     this.app.use(this._router);
+    this.app.use(this.middleware);
   }
-
-
 
   public init() {
     this.app.listen(this.port, () => {
