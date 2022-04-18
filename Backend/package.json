@@ -8,7 +8,9 @@
     "start": "node --trace-warnings ./dist/index",
     "build": "npm run tsc",
     "tsc": "tsc -p tsconfig.json",
-    "seed": "node --trace-warnings ./dist/app/utils/seeder.js"
+    "seed": "node --trace-warnings ./dist/app/utils/seeder.js",
+    "dev": "SET NODE_ENV=DEVELOPMENT& node --trace-warnings ./dist/index",
+    "prod": "SET NODE_ENV=PRODUCTION& node --trace-warnings ./dist/index"
   },
   "keywords": [],
   "author": "",
@@ -19,7 +21,6 @@
     "@types/express": "^4.17.13",
     "@types/jest": "^27.4.1",
     "@types/node": "^17.0.23",
-    "@types/sqlite3": "^3.1.8",
     "@typescript-eslint/eslint-plugin": "^5.17.0",
     "@typescript-eslint/parser": "^5.17.0",
     "eslint": "^8.12.0",
@@ -34,12 +35,14 @@
   "dependencies": {
     "axios": "^0.26.1",
     "cloudinary": "^1.29.0",
-    "config": "^3.3.7",
     "cors": "^2.8.5",
     "debug": "^4.3.4",
-    "dotenv": "^16.0.0",
     "express": "^4.17.3",
     "mongodb": "^4.5.0",
     "mongoose": "^6.2.10"
+  },
+  "optionalDependencies": {
+    "dotenv": "^16.0.0",
+    "config": "^3.3.7"
   }
 }
