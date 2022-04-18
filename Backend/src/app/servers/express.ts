@@ -17,11 +17,13 @@ export class HttpServer {
   private app = expressApp;
   private _router: express.Router;
   private _port: string;
-  private middleware = errors
+  private middleware = errors;
+  private _nodeEnv: string;
 
-  constructor(port: string, router: express.Router) {
+  constructor(port: string, nodeEnv: string, router: express.Router) {
     this._port = port;
     this._router = router;
+    this._nodeEnv = nodeEnv;
     this.useRouter();
   }
 
@@ -42,6 +44,14 @@ export class HttpServer {
     return this._router;
   }
 
+  public set nodeEnv(nodeEnv: string){
+    this._nodeEnv = nodeEnv;
+  }
+
+  public get nodeEnv(): string {
+    return this._nodeEnv;
+  }
+
   private useRouter() {
     this.app.use(this._router);
     this.app.use(this.middleware);
@@ -49,7 +59,7 @@ export class HttpServer {
 
   public init() {
     this.app.listen(this.port, () => {
-      console.log(`Listening on port ${this.port}\n`);
+      console.log(`Listening on port ${this.port} in ${this.nodeEnv} mode\n`);
     })
   }
 }
