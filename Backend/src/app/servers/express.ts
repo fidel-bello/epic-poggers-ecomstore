@@ -58,8 +58,21 @@ export class HttpServer {
   }
 
   public init() {
-    this.app.listen(this.port, () => {
+    
+    const server = this.app.listen(this.port, () => {
       console.log(`Listening on port ${this.port} in ${this.nodeEnv} mode\n`);
-    })
-  }
-}
+    });
+
+    process.on('unhandledRejection', errors => {
+
+      //unhandled promise rejection immediately shut down server
+
+      console.log(`ERROR: ${errors}`);
+      console.log('Server closing due to Unhandled Rejection');
+
+      server.close(() => {
+        process.exit(1);
+      });
+    });
+  };
+};
