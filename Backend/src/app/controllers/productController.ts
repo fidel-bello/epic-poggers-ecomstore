@@ -1,22 +1,25 @@
 import { Product } from "../models/product";
-import * as express from 'express';
+import {Request, Response, NextFunction} from "express";
 import { Error_Handler } from "../utils/errorHandling";
+import asyncError from "../middlewares/asyncError";
+
 
 export class Product_Controllers
  {
     //create products
-    public createProducts = async (req: express.Request, res: express.Response, next: express.NextFunction): Promise<void> => {
+    public createProducts = asyncError(async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+        req.body.user = req.body.id
 
-        await Product.create(req.body);
+        const product = await Product.create(req.body);
 
         res.status(201).json({
             success: true,
-            Product
+            product
         })
-    };
+    });
 
 
-    public getProducts = async (req: express.Request, res: express.Response, next: express.NextFunction): Promise<void> => {    //get_products 
+    public getProducts = async (req: Request, res: Response, next: NextFunction): Promise<void> => {    //get_products 
 
         const products = await Product.find();
 
@@ -28,7 +31,7 @@ export class Product_Controllers
     };
 
 
-    public getSingleProduct = async (req: express.Request, res: express.Response, next: express.NextFunction): Promise<void> => { //get single product with id assigned by mongoose
+    public getSingleProduct = async (req: Request, res: Response, next: NextFunction): Promise<void> => { //get single product with id assigned by mongoose
 
         const product = await Product.findById(req.params.id);
 
@@ -41,7 +44,7 @@ export class Product_Controllers
         })
     }
 
-    public updateProduct = async (req: express.Request, res: express.Response, next: express.NextFunction): Promise<void> => {
+    public updateProduct = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
 
         let product = await Product.findById(req.params.id);
 
@@ -62,7 +65,7 @@ export class Product_Controllers
 
 
     
-    public deleteProduct = async(req: express.Request, res: express.Response, next: express.NextFunction): Promise<void> => {
+    public deleteProduct = async(req: Request, res: Response, next: NextFunction): Promise<void> => {
         const product = await Product.findByIdAndRemove(req.params.id);
 
         if(!product)
