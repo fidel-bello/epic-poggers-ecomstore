@@ -63,12 +63,12 @@ export class HttpServer {
       console.log(`Listening on port ${this.port} in ${this.nodeEnv} mode\n`);
     });
 
-    process.on('unhandledRejection', errors => {
+    process.on('unhandledRejection', error => {
 
       //unhandled promise rejection immediately shut down server
-
-      console.log(`ERROR: ${errors}`);
       console.log('Server closing due to Unhandled Rejection');
+      error;
+
 
       server.close(() => {
         process.exit(1);
