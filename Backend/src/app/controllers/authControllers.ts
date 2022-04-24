@@ -19,4 +19,4 @@ export class Auth_Controllers
         })
     })
 
-}
+};
