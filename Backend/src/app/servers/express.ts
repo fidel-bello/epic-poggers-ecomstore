@@ -1,6 +1,7 @@
 import express from 'express';
 import cors from 'cors';
 import errors from '../middlewares/errors';
+import { Error_Handler } from '../utils/errorHandling';
 
 
 
@@ -13,12 +14,13 @@ expressApp.use(cors());
 expressApp.use(express.urlencoded({extended: true}));
 expressApp.use(express.json());
 
+
 export class HttpServer {
   private app = expressApp;
   private _router: express.Router;
   private _port: string;
-  private middleware = errors;
   private _nodeEnv: string;
+  private _middlewares = errors;
 
   constructor(port: string, nodeEnv: string, router: express.Router) {
     this._port = port;
@@ -54,7 +56,7 @@ export class HttpServer {
 
   private useRouter() {
     this.app.use(this._router);
-    this.app.use(this.middleware);
+    this.app.use(this._middlewares);
   }
 
   public init() {
@@ -63,16 +65,17 @@ export class HttpServer {
       console.log(`Listening on port ${this.port} in ${this.nodeEnv} mode\n`);
     });
 
-    process.on('unhandledRejection', error => {
+    process.on('unhandledRejection', (err: Error_Handler) => {
 
       //unhandled promise rejection immediately shut down server
+      console.log(`ERROR: ${err.stack}`);
       console.log('Server closing due to Unhandled Rejection');
-      error;
-
 
       server.close(() => {
         process.exit(1);
       });
     });
+
+
   };
 };
