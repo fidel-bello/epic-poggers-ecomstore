@@ -70,12 +70,11 @@ const productSchema = new Schema({
     type: Number,
     default: 0,
   },
-  /*
   reviews: [
     {
       user: {
         type: mongoose.SchemaTypes.ObjectId,
-        //ref: 'User',
+        ref: 'User',
         //required: true,
       },
       name: {
@@ -94,10 +93,9 @@ const productSchema = new Schema({
   ],
   user: {
     type: mongoose.SchemaTypes.ObjectId,
-   // ref: 'User',
+    ref: 'User',
     //required: true,
   },
-  */
   createdAt: {
     type: Date,
     default: Date.now,
