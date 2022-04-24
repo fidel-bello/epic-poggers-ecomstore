@@ -16,7 +16,7 @@ export class Product_Controllers
             success: true,
             product
         })
-    });
+    })
 
 
     public getProducts = asyncError(async(req: Request, res: Response, next: NextFunction): Promise<void> => {    //get_products 
@@ -28,7 +28,7 @@ export class Product_Controllers
             count: products.length,
             products
         })
-    });
+    })
 
 
     public getSingleProduct = asyncError(async (req: Request, res: Response, next: NextFunction): Promise<void> => { //get single product with id assigned by mongoose
@@ -54,7 +54,7 @@ export class Product_Controllers
         product = await Product.findByIdAndUpdate(req.params.id, req.body, {
             new: true,
             runValidators: true,
-        });
+        })
 
         res.status(200).json({
             success: true,

@@ -17,18 +17,18 @@ const userSchema = new Schema({
     email: {
         type: String,
         required: [true, 'Please enter your email'],
-        unique: true,
+        unique: true, // prevents same email from being registered 
         validate: [validateEmail, 'Please enter a valid email']
     },
     password: {
         type: String,
         required: [true, 'You must enter a password'],
         minlength: [6, 'Password must exceed 6 characters'],
-        select: false
+        select: false //exclude path 
     },
     role: {
         type: String,
-        default: 'user'
+        default: 'user' //defaults to normal user
     },
     createdAt: {
         type: Date,

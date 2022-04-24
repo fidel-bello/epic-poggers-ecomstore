@@ -63,7 +63,7 @@ export class HttpServer {
     
     const server = this.app.listen(this.port, () => {
       console.log(`Listening on port ${this.port} in ${this.nodeEnv} mode\n`);
-    });
+    })
 
     process.on('unhandledRejection', (err: Error_Handler) => {
 
@@ -73,9 +73,8 @@ export class HttpServer {
 
       server.close(() => {
         process.exit(1);
-      });
-    });
+      })
+    })
+  }
 
-
-  };
 };
