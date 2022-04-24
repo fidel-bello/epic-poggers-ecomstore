@@ -19,7 +19,7 @@ export class Product_Controllers
     });
 
 
-    public getProducts = async (req: Request, res: Response, next: NextFunction): Promise<void> => {    //get_products 
+    public getProducts = asyncError(async(req: Request, res: Response, next: NextFunction): Promise<void> => {    //get_products 
 
         const products = await Product.find();
 
@@ -28,23 +28,23 @@ export class Product_Controllers
             count: products.length,
             products
         })
-    };
+    });
 
 
-    public getSingleProduct = async (req: Request, res: Response, next: NextFunction): Promise<void> => { //get single product with id assigned by mongoose
+    public getSingleProduct = asyncError(async (req: Request, res: Response, next: NextFunction): Promise<void> => { //get single product with id assigned by mongoose
 
         const product = await Product.findById(req.params.id);
 
-        if (!product)
+        if(!product)
             return next(new Error_Handler('Product not found', 404));
 
         res.status(200).json({
             success: true,
             product
         })
-    }
+    })
 
-    public updateProduct = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+    public updateProduct = asyncError(async (req: Request, res: Response, next: NextFunction): Promise<void> => {
 
         let product = await Product.findById(req.params.id);
 
@@ -61,11 +61,11 @@ export class Product_Controllers
             product,
         })
 
-    }
+    })
 
 
     
-    public deleteProduct = async(req: Request, res: Response, next: NextFunction): Promise<void> => {
+    public deleteProduct = asyncError(async(req: Request, res: Response, next: NextFunction): Promise<void> => {
         const product = await Product.findByIdAndRemove(req.params.id);
 
         if(!product)
@@ -76,7 +76,7 @@ export class Product_Controllers
             message: 'Product deleted'
         })
 
-    }
+    })
 
    
-}
+};
