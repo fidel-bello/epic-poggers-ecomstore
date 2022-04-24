@@ -2,7 +2,7 @@ import { Product } from "../models/product";
 import {Request, Response, NextFunction} from "express";
 import { Error_Handler } from "../utils/errorHandling";
 import asyncError from "../middlewares/asyncError";
-
+import { Api_Features }   from "../utils/apiFeatures";
 
 export class Product_Controllers
  {
@@ -21,7 +21,8 @@ export class Product_Controllers
 
     public getProducts = asyncError(async(req: Request, res: Response, next: NextFunction): Promise<void> => {    //get_products 
 
-        const products = await Product.find();
+        const filteredSearch = new Api_Features(Product.find(), req.query).search();
+        const products = await filteredSearch.query;
 
         res.status(200).json({
             success: true,
