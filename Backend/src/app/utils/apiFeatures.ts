@@ -50,5 +50,16 @@ export class Api_Features
         this.query = this.query.find({...keyword});
         return this;
     }
+
+    public filter(){
+
+        const query = { ...this.queryStr}
+
+        const removeFields = ['keyword', 'limit', 'page'];
+        removeFields.forEach(el => delete query[el]);
+
+        this.query = this.query.find(query);
+        return this;
+    }
     
 }
