@@ -53,12 +53,16 @@ export class Api_Features
 
     public filter(){
 
-        const query = { ...this.queryStr}
-
+        const query = { ...this.queryStr};
+        
         const removeFields = ['keyword', 'limit', 'page'];
         removeFields.forEach(el => delete query[el]);
 
-        this.query = this.query.find(query);
+        let queryStr = JSON.stringify(query);
+        queryStr = queryStr.replace(/\b(gt|gte|lt|lte)\b/g, match => `$${match}`); //gt = greater,  gte = greater equal 
+
+        console.log(queryStr);
+        this.query = this.query.find(JSON.parse(queryStr));
         return this;
     }
     
