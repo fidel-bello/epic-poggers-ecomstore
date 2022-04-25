@@ -21,7 +21,7 @@ export class Product_Controllers
 
     public getProducts = asyncError(async(req: Request, res: Response, next: NextFunction): Promise<void> => {    //get_products 
 
-        const filteredSearch = new Api_Features(Product.find(), req.query).search();
+        const filteredSearch = new Api_Features(Product.find(), req.query).search().filter();
         const products = await filteredSearch.query;
 
         res.status(200).json({
