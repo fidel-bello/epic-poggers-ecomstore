@@ -27,7 +27,7 @@
    * I have made some sample issues at the moment.. but are not assigned. Please add your comments and discuss the issues if you find a better way to do something. I am open to learning!
 
    ## Dependencies
-   * React.js, Node, Sequelize, Typescript
+   * React.js, Node, Mongoose, Typescript, Express
    * future dependencies will be posted here with better format.
 
    ## Installation
