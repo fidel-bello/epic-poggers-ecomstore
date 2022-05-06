@@ -22,6 +22,8 @@ export class Product_Controllers
     public getProducts = asyncError(async(req: Request, res: Response, next: NextFunction): Promise<void> => {    //get_products 
 
         const resultsPerPage = 4;
+        const productCount = await Product.countDocuments();
+
         const filteredSearch = new Api_Features(Product.find(), req.query)
             .search()
             .filter()
@@ -32,6 +34,7 @@ export class Product_Controllers
         res.status(200).json({
             success: true,
             count: products.length,
+            productCount,
             products
         })
     })
