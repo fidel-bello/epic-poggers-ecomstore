@@ -24,6 +24,7 @@ export class Product_Controllers
         const resultsPerPage = 4;
         const filteredSearch = new Api_Features(Product.find(), req.query)
             .search()
+            .filter()
             .pagination(resultsPerPage);
 
         const products = await filteredSearch.query;
