@@ -1,5 +1,6 @@
 interface keywords  {
     keyword? : string;
+    page?: number;
 } // this will keep a properties if needed.. I do not know if this is correct way to put it but it works.. please if you know. set up issue
 
 
@@ -51,6 +52,14 @@ export class Api_Features
         return this;
     }
 
+    public pagination(resPerPage: number) {
+        const currentPage = Number(this.queryStr.page) || 1;
+        const skip = resPerPage  * (currentPage  - 1);
+
+        this.query = this.query.limit(resPerPage).skip(skip);
+        return this;
+    }
+
     public filter(){
 
         const query = { ...this.queryStr};
@@ -64,6 +73,5 @@ export class Api_Features
         this.query = this.query.find(JSON.parse(queryStr));
         return this;
     }
-
     
 }
