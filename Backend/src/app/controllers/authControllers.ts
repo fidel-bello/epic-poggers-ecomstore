@@ -13,9 +13,11 @@ export class Auth_Controllers
             email
         })
 
+        const token = user.getToken();
+
         res.status(201).json({
             success: true,
-            user
+            token
         })
     })
 

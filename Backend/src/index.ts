@@ -11,5 +11,5 @@ process.on('uncaughtException', (err: Error_Handler) => {
 
 const dbConnection = new Database(config.get('URI'));
 dbConnection.connectionMongo();
-const app = new HTTP.HttpServer(config.get('PORT'), config.get('NODE_ENV'), router);
+const app = new HTTP.HttpServer(config.get('PORT'), config.get('NODE_ENV'),config.get('JWT_SECRET'), config.get('JWT_EXPIRATION') ,router);
 app.init();
