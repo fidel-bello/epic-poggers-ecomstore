@@ -19,11 +19,15 @@ export class HttpServer {
   private app = expressApp;
   private _router: express.Router;
   private _port: string;
+  private _jwt: string;
+  private _jwtExpiration: string;
   private _nodeEnv: string;
   private _middlewares = errors;
 
-  constructor(port: string, nodeEnv: string, router: express.Router) {
+  constructor(port: string, nodeEnv: string, jwt:string, jwtExpiration: string,  router: express.Router) {
     this._port = port;
+    this._jwt = jwt;
+    this._jwtExpiration = jwtExpiration;
     this._router = router;
     this._nodeEnv = nodeEnv;
     this.useRouter();
@@ -52,6 +56,22 @@ export class HttpServer {
 
   public get nodeEnv(): string {
     return this._nodeEnv;
+  }
+
+  public set jwt(jwt: string) {
+    this._jwt = jwt;
+  }
+
+  public get jwt(): string {
+    return this._jwt;
+  }
+
+  public set jwtExpiration(jwtExpiration: string) {
+    this._jwtExpiration = jwtExpiration;
+  }
+
+  public get jwtExpiration(): string {
+    return this._jwtExpiration;
   }
 
   private useRouter() {
