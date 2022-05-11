@@ -46,6 +46,8 @@
    * fidel-bello
    * balliam
    * nmp14
+   * ivan-ngchakming
+
 
    ## Test
    * jest will be used to test the front end
