@@ -35,12 +35,12 @@
     },
     "rules": {
         "no-use-before-define": "off",
-        "@typescript-eslint/no-use-before-define": ["error"],
+        "@typescript-eslint/no-use-before-define": ["warn"],
         "react/jsx-filename-extension": [ "warn", {"extensions": [".tsx"]} ],
         "react/react-in-jsx-scope": "off",
         "import/extensions": "off",
         "indent": [
-            "error",
+            "warn",
             2,
             {
                 "SwitchCase": 1,
@@ -48,6 +48,8 @@
                 "ImportDeclaration": "first"
             }
         ],
-        "quotes": ["error", "single"]
+        "quotes": ["warn", "single"],
+        "object-curly-spacing": "warn",
+        "jsx-quotes": "warn"
     }
 }
