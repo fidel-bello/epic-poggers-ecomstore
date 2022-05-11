@@ -1,6 +1,7 @@
 import { Database } from "../config/database";
 import config from "config";
 import { Product } from "../models/product";
+
 const product_data = require("../data/products.json");
 const mongoose_connection = new Database(config.get('URI'));
 

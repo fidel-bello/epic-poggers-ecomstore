@@ -22,6 +22,7 @@ const userSchema = new Schema({
         unique: true, // prevents same email from being registered 
         validate: [validateEmail, 'Please enter a valid email']
     },
+
     password: {
         type: String,
         required: [true, 'You must enter a password'],
