@@ -1,5 +1,5 @@
 import { createTheme, CssBaseline, ThemeProvider } from '@mui/material';
-import Navbar from './Navbar';
+import { Navbar } from './components/Navbar';
 
 const theme = createTheme({
   palette: {
