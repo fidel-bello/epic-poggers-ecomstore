@@ -2,15 +2,14 @@ import express from 'express';
 import cors from 'cors';
 import errors from '../middlewares/errors';
 import { Error_Handler } from '../utils/errorHandling';
-
-
+import cookieParser from 'cookie-parser'
 
 // import { Core } from '../framework';
-
 // Core.App = Core.Application.ApplicationCreate({appName: 'ecom'});
 // const { App } = Core;
 const expressApp = express();
 expressApp.use(cors());
+expressApp.use(cookieParser());
 expressApp.use(express.urlencoded({extended: true}));
 expressApp.use(express.json());
 

@@ -2,23 +2,22 @@ import asyncError from "../middlewares/asyncError";
 import { NextFunction, Request, Response } from "express";
 import { Error_Handler } from "../utils/errorHandling";
 import { User } from "../models/user";
+import { sendToken } from "../middlewares/jwtToken";
+
 
 export class Auth_Controllers
 {
     public registerUser = asyncError( async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+
         const {email, password, name } = req.body;
+
         const user = await User.create({
             name,
             password,
             email
         })
 
-        const token = user.getToken();
-
-        res.status(201).json({
-            success: true,
-            token
-        })
+        sendToken(user, 200, res);
     })
 
 
@@ -38,13 +37,8 @@ export class Auth_Controllers
         if(!isPassword)
             return next(new Error_Handler('Invalid email or password', 400));
 
-        const token = user.getToken();
-
-        res.status(200).json({
-            success: true,
-            message: `Welcome ${user.name}!`,
-            token
-        })
+        
+        sendToken(user, 200, res);
     })
 
 };
