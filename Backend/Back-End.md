@@ -4,12 +4,14 @@
 * member expresions - pne space
 * strings will be single quotes, except jsx rules which are double quotes
   
-## Starting server
+## Starting scripts
 * will have to install packages with npm install
 * npm run build
-* npm start
+* npm run dev
+* npm run prod
 * server should run
 * will make scripts to do it concurrently
+
 
 ## Formatting
 * Classes will be snake cased with capital letters
