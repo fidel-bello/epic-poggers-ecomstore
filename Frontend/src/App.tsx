@@ -1,11 +1,20 @@
-import React from 'react';
-import './App.css';
+import { createTheme, CssBaseline, ThemeProvider } from '@mui/material';
+import Navbar from './Navbar';
+
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: '#131921',
+    },
+  },
+});
 
 function App() {
   return (
-    <div className="App">
-      <h1>Works</h1>
-    </div>
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+      <Navbar />
+    </ThemeProvider>
   );
 }
 
