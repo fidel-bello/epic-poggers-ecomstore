@@ -13,6 +13,6 @@ router.route('/admin/products/:id')
     .put(User.isAuthenticated , Product.updateProduct)
     .delete(User.isAuthenticated, Product.deleteProduct); //could be wrong format? did this because the admin product id route is used twice
 
-router.route('/admin/products/new').post(Product.createProducts);
+router.route('/admin/products/new').post(User.isAuthenticated, Product.createProducts);
 
 export default router
