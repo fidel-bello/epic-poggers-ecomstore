@@ -8,5 +8,8 @@ const User = new Auth_Controllers();
 router.route('/register').post(User.registerUser);
 router.route('/login').post(User.loginUser);
 
+router.route('/logout').get(User.logoutUser);
+
+
 export default router
 

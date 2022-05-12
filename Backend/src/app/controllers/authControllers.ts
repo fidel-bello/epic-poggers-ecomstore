@@ -42,7 +42,7 @@ export class Auth_Controllers
         sendToken(user, 200, res);
     })
 
-    public isAuthenticated = asyncError(async (req: any, res: Response, next: NextFunction) => {
+    public isAuthenticated = asyncError(async (req: any, res: Response, next: NextFunction): Promise<void> => {
     
         const { token } = req.cookies;
     
@@ -56,4 +56,18 @@ export class Auth_Controllers
         next();
     
     })
+
+
+    public logoutUser = asyncError( async (req: any, res: Response, next: NextFunction): Promise<void> => {
+
+        res.cookie('token', null, {
+            expires: new Date(Date.now()),
+            httpOnly: true
+        })
+
+        res.status(200).json({
+            success: true,
+            message: "Logged out"
+        })
+    }) 
 };
