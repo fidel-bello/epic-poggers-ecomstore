@@ -2,11 +2,9 @@ import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
-import { IconButton, styled, TextField } from '@mui/material';
-import MenuItem from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
-import Select from '@mui/material/Select';
-import SearchIcon from '@mui/icons-material/Search';
+import { styled } from '@mui/material';
+
+import { SearchBar } from './components/SearchBar';
 
 const Logo = styled('span')(({ theme }) => ({
   backgroundImage: 'url("https://images-na.ssl-images-amazon.com/images/G/01/gno/sprites/nav-sprite-global-1x-hm-dsk-reorg._CB405937547_.png")',
@@ -22,24 +20,6 @@ const LocationOnOutlinedIcon = styled('span')(() => ({
   height: 18,
   backgroundPosition: '-71px -378px',
 }));
-
-function SearchBar() {
-  return (
-    <Box display="flex" mx={2} width="100%" sx={{ backgroundColor: 'white' }}>
-      <FormControl>
-        <Select size="small" value="All">
-          <MenuItem>All</MenuItem>
-        </Select>
-      </FormControl>
-      <TextField fullWidth variant="outlined" size="small" />
-      <Box sx={{ backgroundColor: '#febd69' }}>
-        <IconButton>
-          <SearchIcon />
-        </IconButton>
-      </Box>
-    </Box>
-  );
-}
 
 function Navbar() {
   return (
@@ -65,4 +45,4 @@ function Navbar() {
   );
 }
 
-export default Navbar;
+export { Navbar };

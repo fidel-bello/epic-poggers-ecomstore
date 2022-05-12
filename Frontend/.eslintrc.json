@@ -50,6 +50,7 @@
         ],
         "quotes": ["warn", "single"],
         "object-curly-spacing": "warn",
-        "jsx-quotes": "warn"
+        "jsx-quotes": "warn",
+        "import/prefer-default-export": "off"
     }
 }
