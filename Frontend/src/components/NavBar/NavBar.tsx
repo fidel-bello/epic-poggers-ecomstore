@@ -4,7 +4,7 @@ import MuiAppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
-import LogoImg from '../assets/images/logo.svg';
+import LogoImg from '../../assets/images/logo.svg';
 import SearchBar from './SearchBar';
 
 const Logo = styled('img')(({ theme }) => ({
