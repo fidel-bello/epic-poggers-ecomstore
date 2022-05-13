@@ -5,14 +5,17 @@ import Typography from '@mui/material/Typography';
 import { styled } from '@mui/material';
 
 import { SearchBar } from './components/SearchBar';
+import LogoImg from '../../assets/images/logo.svg';
 
-const Logo = styled('span')(({ theme }) => ({
-  backgroundImage: 'url("https://images-na.ssl-images-amazon.com/images/G/01/gno/sprites/nav-sprite-global-1x-hm-dsk-reorg._CB405937547_.png")',
-  width: 97,
-  height: 30,
-  backgroundPosition: '-10px -51px',
-  marginRight: theme.spacing(4),
-}));
+import './Navbar.css';
+
+// const Logo = styled('span')(({ theme }) => ({
+//   backgroundImage: `url(${LogoImg})`,
+//   width: 97,
+//   height: 30,
+//   backgroundSize: 'cover',
+//   marginRight: theme.spacing(4),
+// }));
 
 const LocationOnOutlinedIcon = styled('span')(() => ({
   backgroundImage: 'url("https://images-na.ssl-images-amazon.com/images/G/01/gno/sprites/nav-sprite-global-1x-hm-dsk-reorg._CB405937547_.png")',
@@ -26,7 +29,11 @@ function Navbar() {
     <Box>
       <AppBar position="static">
         <Toolbar>
-          <Logo />
+          <img
+            className="navbar-logo"
+            src={LogoImg}
+            alt="S-Mart shopping logo"
+          />
           <Box display="flex" flex="1 1 auto" alignItems="flex-end" mb={1}>
             <LocationOnOutlinedIcon />
             <Box ml={1}>
