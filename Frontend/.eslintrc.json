@@ -49,6 +49,7 @@
                 "ImportDeclaration": "first"
             }
         ],
+        "linebreak-style": 0,
         "quotes": ["warn", "single"],
         "object-curly-spacing": "warn",
         "jsx-quotes": "warn",
