@@ -4,10 +4,8 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import { styled } from '@mui/material';
 
-import { SearchBar } from './components/SearchBar';
-import LogoImg from '../../assets/images/logo.svg';
-
-import './Navbar.css';
+import SearchBar from './SearchBar';
+import LogoImg from '../assets/images/logo.svg';
 
 // const Logo = styled('span')(({ theme }) => ({
 //   backgroundImage: `url(${LogoImg})`,
