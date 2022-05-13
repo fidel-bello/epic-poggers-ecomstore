@@ -21,7 +21,8 @@
         "@typescript-eslint",
         "jest",
         "arca",
-        "unused-imports"
+        "unused-imports",
+        "only-warn"
     ],
     "settings": {
         "import/parsers": {
