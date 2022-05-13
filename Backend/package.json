@@ -27,6 +27,7 @@
     "eslint": "^8.12.0",
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-plugin-import": "^2.25.4",
+    "nodemon": "^2.0.16",
     "ts-jest": "^27.1.4",
     "ts-node": "^10.7.0",
     "ts-node-dev": "^1.1.8",
@@ -44,8 +45,7 @@
     "express": "^4.18.1",
     "jsonwebtoken": "^8.5.1",
     "mongodb": "^4.5.0",
-    "mongoose": "^6.2.10",
-    "nodemon": "^2.0.16"
+    "mongoose": "^6.2.10"
   },
   "optionalDependencies": {
     "config": "^3.3.7",
