@@ -51,6 +51,9 @@
         "quotes": ["warn", "single"],
         "object-curly-spacing": "warn",
         "jsx-quotes": "warn",
-        "import/prefer-default-export": "off"
+        "import/prefer-default-export": "off",
+        "no-unused-vars": "warn",
+        "object-curly-newline": "warn",
+        "semi": "warn"
     }
 }
