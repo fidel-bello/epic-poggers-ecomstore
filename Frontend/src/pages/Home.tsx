@@ -17,7 +17,7 @@ import { Product } from '../types';
 const BASE_URL = process.env.REACT_APP_BASE_URL;
 
 export default function Home() {
-  const [page, setPage] = useState(0);
+  const [page, setPage] = useState(1);
 
   const handlePageChange = (event: ChangeEvent<unknown>, value: number) => {
     setPage(value);
