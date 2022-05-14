@@ -31,11 +31,11 @@ const userSchema = new Schema({
     },
     role: {
         type: String,
-        default: 'user' //defaults to normal user
+        default: 'user'  //defaults to normal user
     },
     createdAt: {
         type: Date,
-        default: Date.now
+        default: Date.now()
     },
 
     resetPasswordToken: String,

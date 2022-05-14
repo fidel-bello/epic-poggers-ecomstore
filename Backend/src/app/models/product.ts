@@ -94,7 +94,7 @@ const productSchema = new Schema({
   user: {
     type: mongoose.SchemaTypes.ObjectId,
     ref: 'User',
-    //required: true,
+    required: true,
   },
   createdAt: {
     type: Date,

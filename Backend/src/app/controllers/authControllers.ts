@@ -4,11 +4,12 @@ import { Error_Handler } from "../utils/errorHandling";
 import { User } from "../models/user";
 import jwt from "jsonwebtoken";
 import { sendToken } from "../middlewares/jwtToken";
+import process from "process";
 
 
 export class Auth_Controllers
 {
-    public registerUser = asyncError( async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+    public registerUser = asyncError( async (req: Request, res: Response, _next: NextFunction): Promise<void> => {
 
         const {email, password, name } = req.body;
 
@@ -42,7 +43,7 @@ export class Auth_Controllers
         sendToken(user, 200, res);
     })
 
-    public isAuthenticated = asyncError(async (req: any, res: Response, next: NextFunction): Promise<void> => {
+    public isAuthenticated = asyncError(async (req: any, _res: Response, next: NextFunction): Promise<void> => {
     
         const { token } = req.cookies;
     
@@ -58,7 +59,7 @@ export class Auth_Controllers
     })
 
 
-    public logoutUser = asyncError( async (req: any, res: Response, next: NextFunction): Promise<void> => {
+    public logoutUser = asyncError( async (_req: any, res: Response, _next: NextFunction): Promise<void> => {
 
         res.cookie('token', null, {
             expires: new Date(Date.now()),
@@ -69,5 +70,12 @@ export class Auth_Controllers
             success: true,
             message: "Logged out"
         })
-    }) 
+    })
+
+    public authorizeRoles = (...roles: any[]) =>  {
+        return (req: any, res:Response, next: NextFunction) => {
+            if(!roles.includes(req.user.role))
+               return next(new Error_Handler(`Role: "${req.user.role}" is not allowed to access this route`, 403));
+        }
+    }
 };
