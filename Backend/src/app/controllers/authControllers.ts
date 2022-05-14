@@ -72,7 +72,7 @@ export class Auth_Controllers
         })
     })
 
-    public authorizeRoles = (...roles: any[]) =>  {
+    public authorizeRoles = (...roles: Role[]) =>  {
         return (req: any, res:Response, next: NextFunction) => {
             if(!roles.includes(req.user.role))
                return next(new Error_Handler(`Role: "${req.user.role}" is not allowed to access this route`, 403));
