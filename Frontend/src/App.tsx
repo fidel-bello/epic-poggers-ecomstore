@@ -1,6 +1,6 @@
 import { createTheme, CssBaseline, ThemeProvider } from '@mui/material';
 import { QueryClient, QueryClientProvider } from 'react-query';
-import { Navbar } from './components/Navbar';
+import { NavBar } from './components';
 import Home from './pages/Home';
 
 const queryClient = new QueryClient();
@@ -8,7 +8,7 @@ const queryClient = new QueryClient();
 const theme = createTheme({
   palette: {
     primary: {
-      main: '#131921',
+      main: '#FEF200',
     },
   },
 });
@@ -18,7 +18,7 @@ function App() {
     <QueryClientProvider client={queryClient}>
       <ThemeProvider theme={theme}>
         <CssBaseline />
-        <Navbar />
+        <NavBar />
         <Home />
       </ThemeProvider>
     </QueryClientProvider>
