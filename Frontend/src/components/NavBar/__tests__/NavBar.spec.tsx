@@ -1,6 +1,6 @@
 import { render } from '@testing-library/react';
 
-import NavBar from '../NavBar';
+import { NavBar } from '../NavBar';
 
 describe('NavBar', () => {
   it('Should render', () => {
