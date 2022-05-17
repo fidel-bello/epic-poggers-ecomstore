@@ -90,8 +90,8 @@ export class Auth_Controllers {
 
     public authorizeRoles = (...roles: UserRole[]) =>  {
         return (req: Request, res:Response, next: NextFunction) => {
-            if(!roles.includes(UserRole.admin))
-               return next(new Error_Handler(`Role: "${UserRole.admin}" is not allowed to access this route`, 403));
+            if(!roles.includes(req.user.role))
+               return next(new Error_Handler(`Role: "${req.user.role}" is not allowed to access this route`, 403));
         }
     }
 };
