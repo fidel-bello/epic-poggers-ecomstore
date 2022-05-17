@@ -70,7 +70,7 @@ export default function Home() {
         mb={4}
       >
         <Pagination
-          count={Math.ceil(data.productCount / data.count) - 1}
+          count={Math.ceil(data.productCount / 4)}
           page={page}
           onChange={handlePageChange}
           sx={{
