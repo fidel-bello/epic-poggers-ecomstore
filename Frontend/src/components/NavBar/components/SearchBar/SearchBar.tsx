@@ -12,7 +12,7 @@ const SearchBarRoot = styled(Box)(({ theme }) => ({
   borderRadius: theme.spacing(1),
 }));
 
-export default function SearchBar() {
+export function SearchBar() {
   return (
     <SearchBarRoot display="flex" mx={2} width="100%">
       <FormControl sx={{ width: 80 }}>

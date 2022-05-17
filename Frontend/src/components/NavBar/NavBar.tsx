@@ -5,7 +5,7 @@ import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import LogoImg from '../../assets/images/logo.svg';
-import SearchBar from './SearchBar';
+import { SearchBar } from './components/SearchBar';
 
 const Logo = styled('img')(({ theme }) => ({
   width: 60,
@@ -13,7 +13,7 @@ const Logo = styled('img')(({ theme }) => ({
   marginRight: theme.spacing(3),
 }));
 
-export default function NavBar() {
+export function NavBar() {
   return (
 
     <MuiAppBar position="static">

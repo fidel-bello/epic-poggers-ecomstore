@@ -1,6 +1,6 @@
 import { createTheme, CssBaseline, ThemeProvider } from '@mui/material';
 import { QueryClient, QueryClientProvider } from 'react-query';
-import { NavBar } from './components';
+import { NavBar } from './components/Navbar/NavBar';
 import Home from './pages/Home';
 
 const queryClient = new QueryClient();
