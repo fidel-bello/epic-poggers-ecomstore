@@ -31,7 +31,7 @@ const userSchema = new Schema({
     },
     role: {
         type: String,
-        default: 'user'  //defaults to normal user
+        default: UserRole.User  //defaults to normal user
     },
     createdAt: {
         type: Date,
