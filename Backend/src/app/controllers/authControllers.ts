@@ -8,7 +8,8 @@ import { sendToken } from "../middlewares/jwtToken";
 
 enum UserRole
 {
-    admin = 'admin'
+    Admin = 'admin',
+    User = 'user',
 }
 
 export class Auth_Controllers {
