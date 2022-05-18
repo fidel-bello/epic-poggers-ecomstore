@@ -4,22 +4,19 @@ import { Error_Handler } from "../utils/errorHandling";
 import { User } from "../models/user";
 import jwt from "jsonwebtoken";
 import { sendToken } from "../middlewares/jwtToken";
+import { Role } from "../models/user";
 
 
-enum UserRole
-{
-    admin = 'admin'
-}
 
 export class Auth_Controllers {
 
-    static readonly UserRole = UserRole;
+    static readonly UserRole = Role;
 
     readonly UserRole = Auth_Controllers.UserRole;
 
-    userRole!: UserRole; 
+    userRole!:Role;
 
-    constructor(init?: Partial<Auth_Controllers>){
+    constructor(init?: Partial<Auth_Controllers>) {
         Object.assign(this, init);
     }
 
@@ -88,10 +85,13 @@ export class Auth_Controllers {
         })
     })
 
-    public authorizeRoles = (...roles: UserRole[]) =>  {
-        return (req: Request, res:Response, next: NextFunction) => {
-            if(!roles.includes(UserRole.admin))
-               return next(new Error_Handler(`Role: "${UserRole.admin}" is not allowed to access this route`, 403));
+    public authorizeRoles = (...roles:Role[]) => {
+        return (req: any, _res: Response, next: NextFunction) => {
+            if (!roles.includes(req.user.role)) {
+                return next(new Error_Handler(`Role "${req.user.role}" is not allowed to access this route`, 403));
+            }
+            next();
         }
     }
 };
+

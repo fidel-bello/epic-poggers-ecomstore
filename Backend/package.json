@@ -10,8 +10,8 @@
     "build": "npm run tsc",
     "tsc": "tsc -p tsconfig.json",
     "seed": "ts-node ./src/app/utils/seeder.ts",
-    "dev": "cross-env SET NODE_ENV=DEVELOPMENT & node --trace-warnings ./dist/index",
-    "prod": "cross-env SET NODE_ENV=PRODUCTION & node --trace-warnings ./dist/index"
+    "dev": "cross-env SET NODE_ENV=DEVELOPMENT& node --trace-warnings ./dist/index",
+    "prod": "cross-env SET NODE_ENV=PRODUCTION& node --trace-warnings ./dist/index"
   },
   "keywords": [],
   "author": "",
