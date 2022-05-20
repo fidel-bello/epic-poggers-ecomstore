@@ -1,5 +1,7 @@
 import mongoose from "mongoose";
 
+
+
 const { Schema } = mongoose;
 
 const productSchema = new Schema({
@@ -94,7 +96,7 @@ const productSchema = new Schema({
   user: {
     type: mongoose.SchemaTypes.ObjectId,
     ref: 'User',
-    //required: true,
+    required: true,
   },
   createdAt: {
     type: Date,

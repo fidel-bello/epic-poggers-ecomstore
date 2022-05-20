@@ -3,8 +3,7 @@
     "watch": true,
     "env": {
         "node": true,
-        "es2021": true,
-        "NODE_ENV": "DEVELOPMENT"
+        "es2021": true
     },
     "extends": [
         "airbnb-base"

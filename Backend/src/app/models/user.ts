@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 import bcrypt from "bcrypt";
-import jwt from "jsonwebtoken"
+import jwt from "jsonwebtoken";
 
 const {Schema } = mongoose;
 
@@ -8,6 +8,12 @@ const validateEmail = (email: string) => {
 
     const validators = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
     return validators.test(email);
+}
+
+export enum Role
+{
+    Admin = 'admin',
+    User = 'user',
 }
 
 const userSchema = new Schema({
@@ -31,7 +37,9 @@ const userSchema = new Schema({
     },
     role: {
         type: String,
-        default: 'user' //defaults to normal user
+        enum: Object.values(Role),
+        default: Role.User,
+        required: true
     },
     createdAt: {
         type: Date,
