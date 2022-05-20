@@ -3,6 +3,7 @@ import { NextFunction, Request, Response } from "express";
 import { Error_Handler } from "../utils/errorHandling";
 import { User } from "../models/user";
 import jwt from "jsonwebtoken";
+import cryto from "crypto";
 import { sendEmail, sendToken } from "../middlewares/jwtToken";
 import { Role } from "../models/user";
 import config from 'config';
@@ -191,6 +192,32 @@ export class Auth_Controllers {
 
             return next(new Error_Handler(error.message, 500));
         }
-    }) 
+    })
+
+    public resetPassword = asyncError(async(req:  Request, res: Response, next: NextFunction) => {
+
+        const resetPasswordToken = cryto.createHash('sha256').update(req.params.token).digest('hex');
+
+        const user = await User.findOne({
+            resetPasswordToken,
+            resetPasswordExpire: { $gt: Date.now() }
+        })
+
+        if(!user)
+            return next(new Error_Handler('Password reset token is invalid or has been expired', 400));
+
+        if(req.body.password !== req.body.confirmPassword)
+            return next(new Error_Handler('Passwords do not match', 400 ));
+
+        user.password = req.body.password;
+
+        user.resetPasswordToken = undefined;
+
+        user.resetPasswordExpire = undefined;
+
+        await user.save();
+
+        sendToken(user, 200, res);
+    })
 };
 
