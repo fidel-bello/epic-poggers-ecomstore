@@ -3,8 +3,9 @@ import { NextFunction, Request, Response } from "express";
 import { Error_Handler } from "../utils/errorHandling";
 import { User } from "../models/user";
 import jwt from "jsonwebtoken";
-import { sendToken } from "../middlewares/jwtToken";
+import { sendEmail, sendToken } from "../middlewares/jwtToken";
 import { Role } from "../models/user";
+import config from 'config';
 
 
 
@@ -16,11 +17,73 @@ export class Auth_Controllers {
 
     userRole!:Role;
 
+    private _mailHost: string;
+    private _mailPort: string;
+    private _mailUser: string;
+    private _mailPassword: string;
+    private _fromMail: string;
+    private _fromName: string;
+
+
     constructor(init?: Partial<Auth_Controllers>) {
         Object.assign(this, init);
+
+        this._mailHost = config.get('MAIL_HOST');
+        this._mailPort = config.get('MAIL_PORT');
+        this._mailPassword = config.get('MAIL_PASSWORD');
+        this._mailUser = config.get('MAIL_USER');
+        this._fromName = config.get('FROM_NAME');
+        this._fromMail = config.get('FROM_EMAIL');
     }
 
 
+    public set mailPort(mailPort: string) {
+        this._mailPort = mailPort;
+    }
+
+    public get mailPort(): string {
+        return this._mailPort;
+    }
+
+    public set mailHost(mailPort: string) {
+        this._mailPort = mailPort;
+    }
+
+    public get mailHost(): string {
+        return this._mailHost;
+    }
+
+    public set mailUser(mailUser: string) {
+        this._mailUser = mailUser;
+    }
+
+    public get mailUser(): string {
+        return this._mailUser;
+    }
+
+    public set mailPassword(mailPassword: string) {
+        this._mailPassword = mailPassword;
+    }
+
+    public get mailPassword(): string {
+        return this._mailPassword;
+    }
+
+    public set fromEmail(fromEmail: string) {
+        this._fromMail = fromEmail;
+    }
+
+    public get fromEmail(): string {
+        return this._fromMail;
+    }
+
+    public set fromName(fromName: string) {
+         this._fromName = fromName;
+    }
+
+    public get fromName(): string {
+        return this._fromName
+    }
 
     public registerUser = asyncError(async (req: Request, res: Response, _next: NextFunction): Promise<void> => {
 
@@ -93,5 +156,41 @@ export class Auth_Controllers {
             next();
         }
     }
+
+    public forgotPassword = asyncError(async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+        
+        const user = await User.findOne({ email: req.body.email });
+        if(!user)
+            return next(new Error_Handler('Email does not exist', 404));
+
+        const resetToken = user.generateResetPassowrd();
+
+        await user.save({ validateBeforeSave: false});
+
+        const url = `${req.protocol}://${req.get('host')}/password/reset/${resetToken}`;
+
+        const message = `Your reset token. Click the url: \n\n${url}\n\nif you did not request this, please ignore`;
+        try {
+
+            await sendEmail({
+                email: user.email,
+                subject: 'Poggers Password Recovery',
+                message
+            })
+
+            res.status(200).json({
+                success: true,
+                message: `Email, sent to: ${user.email}`
+            })
+        } catch (error) {
+            
+            user.resetPasswordToken = undefined;
+            user.resetPasswordExpire = undefined;
+
+            await user.save({ validateBeforeSave: false });
+
+            return next(new Error_Handler(error.message, 500));
+        }
+    }) 
 };
 

@@ -1,4 +1,6 @@
 import { Response } from "express";
+import nodemailer from 'nodemailer'; //https://nodemailer.com/usage/ great for sending mail ... using mailtrap as a sandbox
+import { Auth_Controllers } from "../controllers/authControllers";
 
 
 
@@ -20,4 +22,27 @@ export const sendToken = (user: any, statusCode: number, res: Response) => {
         user
     });
 
+}
+
+export const  sendEmail = async (options: { email: string; subject: string; message: string; }) =>  {
+    
+    const user = new Auth_Controllers();
+
+    const transport = nodemailer.createTransport({
+        host: user.mailHost,
+        port: user.mailPort,
+        auth: {
+          user: user.mailUser,
+          pass: user.mailPassword
+        }
+      });
+
+      const message = {
+          from: `${user.fromName} <${user.fromEmail}>`,
+          to: options.email,
+          subject: options.subject,
+          text: options.message
+      }
+
+      await transport.sendMail(message);
 }
