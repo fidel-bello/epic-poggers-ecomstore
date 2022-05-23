@@ -32,13 +32,12 @@ export class Product_Controllers
 
       const apiFeatures = new Api_Features(Product.find(), req.query)
         .search()
-        .filter();
+        .filter()
+        .pagination(resPerPage);
 
       let products = await apiFeatures.query;
 
       let filteredProductsCount = products.length;
-
-      apiFeatures.pagination(resPerPage);
 
       products = await apiFeatures.query.clone();
 
@@ -48,16 +47,8 @@ export class Product_Controllers
         resPerPage,
         filteredProductsCount,
         products,
-      });
-
-      res.status(200).json({
-        success: true,
-        productCount,
-        resPerPage,
-        filteredProductsCount,
-        products,
-      });
-
+      })
+      
     }
   )
 
