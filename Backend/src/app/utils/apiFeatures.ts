@@ -53,7 +53,9 @@ export class Api_Features
     }
 
     public pagination(resPerPage: number) {
+
         const currentPage = Number(this.queryStr.page) || 1;
+
         const skip = resPerPage  * (currentPage  - 1);
 
         this.query = this.query.limit(resPerPage).skip(skip);
@@ -65,12 +67,14 @@ export class Api_Features
         const query = { ...this.queryStr};
         
         const removeFields = ['keyword', 'limit', 'page'];
+
         removeFields.forEach(el => delete query[el]);
 
         let queryStr = JSON.stringify(query);
         queryStr = queryStr.replace(/\b(gt|gte|lt|lte)\b/g, match => `$${match}`); //gt = greater,  gte = greater equal 
 
         this.query = this.query.find(JSON.parse(queryStr));
+
         return this;
     }
     
