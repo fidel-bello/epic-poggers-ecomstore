@@ -10,7 +10,7 @@ import {
   Typography,
 } from '@mui/material';
 import {
-  ChangeEvent, useState, Fragment, useEffect,
+  ChangeEvent, useState, useEffect,
 } from 'react';
 import useProductHooks from '../actions/productQueries';
 
@@ -37,8 +37,6 @@ export default function Home() {
 
     <>
       {' '}
-      {/* Fragment allows you to wrap multiple elements without adding an extra node to the Dom */}
-
       { isLoading ? (
         <div>
           loading..
