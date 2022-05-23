@@ -1,10 +1,13 @@
 export type Image = {
+
   public_id: string;
   url: string;
   _id: string;
+
 }
 
 export type Product = {
+
   _id: string;
   name: string;
   price: number;
@@ -18,4 +21,5 @@ export type Product = {
   reviews: any[];
   createdAt: Date;
   __v: number;
+
 }

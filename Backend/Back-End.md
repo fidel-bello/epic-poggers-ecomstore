@@ -35,6 +35,7 @@
 ## Config
 * database file
 * the connection function,, connection strings or passwords will be contained in a hidden env so it doesn't push up to github repo
+* the env variables are: <br>NODE_ENV = DEVELOPMENT <br>NODE_ENV = PRODUCTION <br>URI = mongodb+srv://[username]:[password]@cluster0.q85xi.mongodb.net/[database] <br>JWT_EXPIRATION = 7d <br> JWT_SECRET = YOURSECRET98754321ROSESARERED <br> MAIL_HOST = smtp.mailtrap.io <br> MAIL_PORT = <br>MAIL_USER = <br>MAIL_PASSWORD = <br>FROM_EMAIL = noreply@poggerstore.com<br>FROM_NAME = Poggerstore
 
 ## Controllers
 * This will contain all requests

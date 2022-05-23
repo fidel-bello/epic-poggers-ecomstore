@@ -35,7 +35,6 @@
    * make sure to have a .env file in the root of Backend directory 
    * ![image](https://user-images.githubusercontent.com/73322116/167324220-637eeed4-1085-4319-ace7-0c2725b781b3.png)
    .env file will contain env variables for passwords and such
-   * the variables are: <br>NODE_ENV = DEVELOPMENT <br>NODE_ENV = PRODUCTION <br>URI = mongodb+srv://[username]:[password]@cluster0.q85xi.mongodb.net/[database] <br>JWT_EXPIRATION = 7d <br> JWT_SECRET = YOURSECRET98754321ROSESARERED
    
 
    ## License

@@ -77,19 +77,19 @@ const productSchema = new Schema({
       user: {
         type: mongoose.SchemaTypes.ObjectId,
         ref: 'User',
-        //required: true,
+        required: true,
       },
       name: {
         type: String,
-        //required: true,
+        required: true,
       },
       rating: {
         type: Number,
-       // required: true,
+        required: true,
       },
       comment: {
         type: String,
-       // required: true,
+       required: true,
       },
     },
   ],
