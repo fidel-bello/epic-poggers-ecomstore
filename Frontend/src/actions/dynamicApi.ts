@@ -3,7 +3,7 @@ import axios from 'axios';
  *
  * @param method
  * @param url
- * @param _obj
+ * @param obj
  * @returns
  * method will return the case of the switch-case, here we can use to make our axios calls
  * url will return the url of the call from the backend
