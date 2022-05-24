@@ -1,9 +1,7 @@
-import mongoose from "mongoose";
+import mongoose, { Model, Schema } from "mongoose";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import crypto from 'crypto';
-
-const {Schema } = mongoose;
 
 const validateEmail = (email: string) => {
 
@@ -17,7 +15,7 @@ export enum Role
     User = 'user',
 }
 
-const userSchema = new Schema({
+const userSchema: Schema = new mongoose.Schema({
     name: {
         type: String,
         required: [true, 'Please enter your name'],
