@@ -7,6 +7,7 @@ import cryto from "crypto";
 import { sendEmail, sendToken } from "../middlewares/jwtToken";
 import { Role } from "../models/user";
 import config from 'config';
+import mongoose from "mongoose";
 
 
 
@@ -214,6 +215,22 @@ export class Auth_Controllers {
         user.resetPasswordToken = undefined;
 
         user.resetPasswordExpire = undefined;
+
+        await user.save();
+
+        sendToken(user, 200, res);
+    })
+
+    public updatePassword = asyncError( async (req: any, res: Response, next:NextFunction) => {
+
+        const user = await User.findById(req.user.id).select('+password');
+
+        const match = await user.comparePassword(req.body.oldPassword); //compare passwords
+
+        if(!match)
+            return next(new Error_Handler('passwords do not match', 400));
+
+        user.password = req.body.password; //password is new input
 
         await user.save();
 
