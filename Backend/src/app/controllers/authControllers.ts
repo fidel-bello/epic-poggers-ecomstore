@@ -158,6 +158,17 @@ export class Auth_Controllers {
         }
     }
 
+
+    public getUserProfile = asyncError(async (req:any, res: Response, next: NextFunction) => {
+
+        const user = await User.findById(req.user.id);
+
+        res.status(200).json({
+            success: true,
+            user
+        })
+    })
+
     public forgotPassword = asyncError(async (req: Request, res: Response, next: NextFunction): Promise<void> => {
         
         const user = await User.findOne({ email: req.body.email });
