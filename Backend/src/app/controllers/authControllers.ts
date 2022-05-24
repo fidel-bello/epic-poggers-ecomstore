@@ -7,7 +7,6 @@ import cryto from "crypto";
 import { sendEmail, sendToken } from "../middlewares/jwtToken";
 import { Role } from "../models/user";
 import config from 'config';
-import mongoose from "mongoose";
 
 
 
@@ -228,7 +227,7 @@ export class Auth_Controllers {
         const match = await user.comparePassword(req.body.oldPassword); //compare passwords
 
         if(!match)
-            return next(new Error_Handler('passwords do not match', 400));
+            return next(new Error_Handler('Old Password is incorrect', 400));
 
         user.password = req.body.password; //password is new input
 
