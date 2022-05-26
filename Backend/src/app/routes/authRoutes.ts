@@ -12,6 +12,7 @@ router.route('/login').post(User.loginUser);
 router.route('/logout').get(User.logoutUser);
 
 router.route('/password/reset/:token').put(User.resetPassword);
+router.route('/user/update').put(User.isAuthenticated, User.updateUser);
 router.route('/password/update').put(User.isAuthenticated, User.updatePassword);
 
 
