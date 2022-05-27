@@ -256,5 +256,14 @@ export class Auth_Controllers {
             user
         })
     })
+
+    public adminGetAllRoutes = asyncError(async (req: Request, res: Response, next: NextFunction) => {
+        const users = await User.find();
+
+        res.status(200).json({
+            success: true,
+            users
+        })
+    })
 };
 
