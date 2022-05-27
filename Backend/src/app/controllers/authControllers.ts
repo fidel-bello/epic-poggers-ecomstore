@@ -16,7 +16,7 @@ export class Auth_Controllers {
 
     readonly UserRole = Auth_Controllers.UserRole;
 
-    userRole!:Role;
+    userRole!: Role;
 
     private _mailHost: string;
     private _mailPort: string;
@@ -79,7 +79,7 @@ export class Auth_Controllers {
     }
 
     public set fromName(fromName: string) {
-         this._fromName = fromName;
+        this._fromName = fromName;
     }
 
     public get fromName(): string {
@@ -149,7 +149,7 @@ export class Auth_Controllers {
         })
     })
 
-    public authorizeRoles = (...roles:Role[]) => {
+    public authorizeRoles = (...roles: Role[]) => {
         return (req: any, _res: Response, next: NextFunction) => {
             if (!roles.includes(req.user.role)) {
                 return next(new Error_Handler(`Role "${req.user.role}" is not allowed to access this route`, 403));
@@ -170,14 +170,14 @@ export class Auth_Controllers {
     })
 
     public forgotPassword = asyncError(async (req: Request, res: Response, next: NextFunction): Promise<void> => {
-        
+
         const user = await User.findOne({ email: req.body.email });
-        if(!user)
+        if (!user)
             return next(new Error_Handler('Email does not exist', 404));
 
         const resetToken = user.generateResetPassowrd();
 
-        await user.save({ validateBeforeSave: false});
+        await user.save({ validateBeforeSave: false });
 
         const url = `${req.protocol}://${req.get('host')}/password/reset/${resetToken}`;
 
@@ -195,7 +195,7 @@ export class Auth_Controllers {
                 message: `Email, sent to: ${user.email}`
             })
         } catch (error) {
-            
+
             user.resetPasswordToken = undefined;
             user.resetPasswordExpire = undefined;
 
@@ -205,7 +205,7 @@ export class Auth_Controllers {
         }
     })
 
-    public resetPassword = asyncError(async(req:  Request, res: Response, next: NextFunction) => {
+    public resetPassword = asyncError(async (req: Request, res: Response, next: NextFunction) => {
 
         const resetPasswordToken = cryto.createHash('sha256').update(req.params.token).digest('hex');
 
@@ -214,11 +214,11 @@ export class Auth_Controllers {
             resetPasswordExpire: { $gt: Date.now() }
         })
 
-        if(!user)
+        if (!user)
             return next(new Error_Handler('Password reset token is invalid or has been expired', 400));
 
-        if(req.body.password !== req.body.confirmPassword)
-            return next(new Error_Handler('Passwords do not match', 400 ));
+        if (req.body.password !== req.body.confirmPassword)
+            return next(new Error_Handler('Passwords do not match', 400));
 
         user.password = req.body.password;
 
@@ -229,6 +229,43 @@ export class Auth_Controllers {
         await user.save();
 
         sendToken(user, 200, res);
+    })
+
+    public updatePassword = asyncError(async (req: any, res: Response, next: NextFunction) => {
+
+        const user = await User.findById(req.user.id).select('+password');
+
+        const match = await user.comparePassword(req.body.oldPassword); //compare passwords
+
+        if (!match)
+            return next(new Error_Handler('Old Password is incorrect', 400));
+
+        user.password = req.body.password; //password is new input
+
+        await user.save();
+
+        sendToken(user, 200, res);
+    })
+
+
+    public updateUser = asyncError(async (req: any, res: Response, next: NextFunction) => {
+
+        const data = {
+            name: req.body.name,
+            email: req.body.email
+        }
+
+
+        const user = await User.findById(req.user.id, data, {
+            new: true,
+            runValidators: true,
+            useFindAndModify: false
+        });
+
+        res.status(200).json({
+            success: true,
+            user
+        })
     })
 };
 

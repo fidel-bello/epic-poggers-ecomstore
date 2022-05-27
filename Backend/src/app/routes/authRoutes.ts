@@ -16,6 +16,8 @@ router.route('/user').get(User.isAuthenticated , User.getUserProfile);
 router.route('/logout').get(User.logoutUser);
 
 router.route('/password/reset/:token').put(User.resetPassword);
+router.route('/user/update').put(User.isAuthenticated, User.updateUser);
+router.route('/password/update').put(User.isAuthenticated, User.updatePassword);
 
 
 export default router
