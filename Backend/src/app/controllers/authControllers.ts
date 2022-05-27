@@ -159,9 +159,12 @@ export class Auth_Controllers {
     }
 
 
-    public getUserProfile = asyncError(async (req:any, res: Response, next: NextFunction) => {
+    public getUserProfile = asyncError(async (req: Request, res: Response, next: NextFunction) => {
 
-        const user = await User.findById(req.user.id);
+        const user = await User.findById(req.params.id);
+
+        if(!user)
+            return next(new Error_Handler(`user does not match id: ${req.params.id}`, 404));
 
         res.status(200).json({
             success: true,
@@ -248,15 +251,13 @@ export class Auth_Controllers {
     })
 
 
-    public updateUser = asyncError(async (req: any, res: Response, next: NextFunction) => {
-
+    public updateUser = asyncError(async (req: any, res: Response, _next: NextFunction) => {
         const data = {
             name: req.body.name,
             email: req.body.email
         }
 
-
-        const user = await User.findById(req.user.id, data, {
+        const user = await User.findByIdAndUpdate(req.user.id, data, {
             new: true,
             runValidators: true,
             useFindAndModify: false
@@ -268,13 +269,13 @@ export class Auth_Controllers {
         })
     })
 
-    public adminGetAllRoutes = asyncError(async (req: Request, res: Response, next: NextFunction) => {
+    public adminGetAllRoutes = asyncError(async (_req: Request, res: Response, _next: NextFunction) => {
         const users = await User.find();
 
         res.status(200).json({
             success: true,
             users
-        })
-    })
+        });
+    });
 };
 
