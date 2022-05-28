@@ -3,7 +3,6 @@
 
    ## Table of Contents
    * [Description](#Description)
-   * [Github-Practices](#Github-Practices)
    * [Installation](#Installation)
    * [Dependencies](#Dependencies)
    * [license](#License)
@@ -17,11 +16,6 @@
    * This app will use REST apis to call actions from the back end to the front-end
    * The application will use React for the front-end. And Node for the back-end
    * There is no deadline for this project. I started this project for practice and contributions as a group. But this project will be finished.
-
-   ## Github-Practices
-   * If you find a bug, please create an issue
-   * If you would like to start on something new please create an issue and assign to yourself, you can close issue when the task is finished
-   * I have made some sample issues at the moment.. but are not assigned. Please add your comments and discuss the issues if you find a better way to do something. I am open to learning!
 
    ## Dependencies
    * React.js, Node.js, Mongoose, Typescript, Express
