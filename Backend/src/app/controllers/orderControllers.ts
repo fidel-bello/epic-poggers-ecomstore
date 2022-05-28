@@ -52,4 +52,12 @@ export class Order_Controllers {
         })
     })
 
+    public getOrders = asyncError(async(_req:Request, res:Response, _next: NextFunction) => {
+        const orders = await Order.find();
+        res.status(200).json({
+            success: true,
+            orders
+        })
+    })
+
 }
