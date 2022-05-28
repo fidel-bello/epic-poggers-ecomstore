@@ -1,4 +1,4 @@
-import mongoose, { Model, Schema } from "mongoose";
+import mongoose, { Schema } from "mongoose";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import crypto from 'crypto';
@@ -16,34 +16,12 @@ export enum Role
 }
 
 const userSchema: Schema = new mongoose.Schema({
-    name: {
-        type: String,
-        required: [true, 'Please enter your name'],
-        maxlength: [50, 'Name exceeded amount of allowed characters']
-    },
-    email: {
-        type: String,
-        required: [true, 'Please enter your email'],
-        unique: true, // prevents same email from being registered 
-        validate: [validateEmail, 'Please enter a valid email']
-    },
 
-    password: {
-        type: String,
-        required: [true, 'You must enter a password'],
-        minlength: [6, 'Password must exceed 6 characters'],
-        select: false //exclude path 
-    },
-    role: {
-        type: String,
-        enum: Object.values(Role),
-        default: Role.User,
-        required: true
-    },
-    createdAt: {
-        type: Date,
-        default: Date.now
-    },
+    name: { type: String, required: [true, 'Please enter your name'], maxlength: [50, 'Name exceeded amount of allowed characters']},
+    email: { type: String, required: [true, 'Please enter your email'], unique: true, validate: [validateEmail, 'Please enter a valid email']},
+    password: { type: String, required: [true, 'You must enter a password'], minlength: [6, 'Password must exceed 6 characters'], select: false },
+    role: { type: String, enum: Object.values(Role), default: Role.User, required: true },
+    createdAt: { type: Date, default: Date.now },
 
     resetPasswordToken: String,
     resetPasswordExpire: Date
