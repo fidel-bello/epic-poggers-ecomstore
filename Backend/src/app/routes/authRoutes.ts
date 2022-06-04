@@ -1,6 +1,7 @@
-import { Auth_Controllers } from "../controllers/authControllers";
-import express from "express";
-import { Role } from "../models/user";
+/* eslint-disable camelcase */
+import express from 'express';
+import { Auth_Controllers } from '../controllers/authControllers';
+import { Role } from '../models/user';
 
 const router = express.Router();
 const User = new Auth_Controllers();
@@ -15,8 +16,7 @@ router.route('/user/update').put(User.isAuthenticated, User.updateUser);
 router.route('/password/update').put(User.isAuthenticated, User.updatePassword);
 
 router.route('/user/:id').get(User.getUserProfile);
-router.route('/admin/users').get(User.isAuthenticated, User.authorizeRoles(admin), User.adminGetAllRoutes)
+router.route('/admin/users').get(User.isAuthenticated, User.authorizeRoles(admin), User.adminGetAllRoutes);
 router.route('/logout').get(User.logoutUser);
 
-export default router
-
+export default router;

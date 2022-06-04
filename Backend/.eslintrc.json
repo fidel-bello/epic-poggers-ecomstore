@@ -1,8 +1,6 @@
 {
-    "root": true,
-    "watch": true,
     "env": {
-        "node": true,
+        "browser": true,
         "es2021": true
     },
     "extends": [
@@ -14,12 +12,26 @@
         "sourceType": "module"
     },
     "plugins": [
-        "@typescript-eslint"
+        "@typescript-eslint",
+        "unused-imports",
+        "only-warn"
     ],
+    "settings": {
+        "import/parsers": {
+            "@typescript-eslint/parser": [".js", ".ts"]
+        },
+        "import/resolver": {
+            "node": {
+                "extensions": [".js", ".ts"]
+            }
+        }
+    },
     "rules": {
-        "quotes": ["error", "single"],
+        "no-use-before-define": "off",
+        "@typescript-eslint/no-use-before-define": ["warn"],
+        "import/extensions": "off",
         "indent": [
-            "error",
+            "warn",
             2,
             {
                 "SwitchCase": 1,
@@ -27,11 +39,12 @@
                 "ImportDeclaration": "first"
             }
         ],
-        "template-curly-spacing": ["error", "always"],
-        "consistent-return": 2,
-        "@typescript-eslint/no-var-requires": 2,
-        "@typescript-eslint/ban-ts-ignore": "off",
-        "@typescript-eslint/ban-ts-comment": "off",
-        "@typescript-eslint/no-empty-function": 0
+        "linebreak-style": 0,
+        "quotes": ["warn", "single"],
+        "object-curly-spacing": "warn",
+        "import/prefer-default-export": "off",
+        "no-unused-vars": "warn",
+        "object-curly-newline": "warn",
+        "semi": "warn"
     }
 }

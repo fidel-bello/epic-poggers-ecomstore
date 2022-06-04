@@ -1,14 +1,16 @@
-import { Product } from '../models/product';
+/* eslint-disable consistent-return */
+/* eslint-disable no-unused-vars */
+/* eslint-disable camelcase */
 import { Request, Response, NextFunction } from 'express';
+import { Product } from '../models/product';
 import { Error_Handler } from '../utils/errorHandling';
 import asyncError from '../middlewares/asyncError';
 import { Api_Features } from '../utils/apiFeatures';
 
-export class Product_Controllers
-{
-  //create products
+export class Product_Controllers {
+  // create products
   public createProducts = asyncError(
-      
+
     async (req: Request, res: Response, _next: NextFunction): Promise<void> => {
       req.body.user = req.body.id;
 
@@ -18,13 +20,13 @@ export class Product_Controllers
         success: true,
         product,
       });
-    }
+    },
   );
 
   public getProducts = asyncError(
 
     async (req: any, res: Response, _next: NextFunction): Promise<void> => {
-      //get_products
+      // get_products
 
       const resPerPage = 4;
 
@@ -37,7 +39,7 @@ export class Product_Controllers
 
       let products = await apiFeatures.query;
 
-      let filteredProductsCount = products.length;
+      const filteredProductsCount = products.length;
 
       products = await apiFeatures.query.clone();
 
@@ -47,15 +49,14 @@ export class Product_Controllers
         resPerPage,
         filteredProductsCount,
         products,
-      })
-      
-    }
-  )
+      });
+    },
+  );
 
   public getSingleProduct = asyncError(
 
     async (req: Request, res: Response, next: NextFunction): Promise<void> => {
-      //get single product with id assigned by mongoose
+      // get single product with id assigned by mongoose
 
       const product = await Product.findById(req.params.id);
 
@@ -65,14 +66,12 @@ export class Product_Controllers
         success: true,
         product,
       });
-
-    }
-  )
+    },
+  );
 
   public updateProduct = asyncError(
 
     async (req: Request, res: Response, next: NextFunction): Promise<void> => {
-
       let product = await Product.findById(req.params.id);
 
       if (!product) return next(new Error_Handler('Product not found', 404));
@@ -86,13 +85,12 @@ export class Product_Controllers
         success: true,
         product,
       });
-    }
-  )
+    },
+  );
 
   public deleteProduct = asyncError(
 
     async (req: Request, res: Response, next: NextFunction): Promise<void> => {
-
       const product = await Product.findByIdAndRemove(req.params.id);
 
       if (!product) return next(new Error_Handler('Product not found', 404));
@@ -100,7 +98,7 @@ export class Product_Controllers
       res.status(200).json({
         success: true,
         message: 'Product deleted',
-      })
-    }
-  )
-};
+      });
+    },
+  );
+}

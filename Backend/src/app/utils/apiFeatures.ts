@@ -1,81 +1,68 @@
-interface keywords  {
+/* eslint-disable no-underscore-dangle */
+/* eslint-disable camelcase */
+interface keywords {
     keyword? : string;
     page?: number;
-} // this will keep a properties if needed.. I do not know if this is correct way to put it but it works.. please if you know. set up issue
+}
+export class Api_Features {
+  private _query: any;
 
+  private _queryStr: keywords;
 
+  constructor(query: any, queryStr: keywords) {
+    this._query = query;
+    this._queryStr = queryStr;
+  }
 
-export class Api_Features
-{
+  public set query(query: any) {
+    this._query = query;
+  }
 
-    private _query: any;
-    private _queryStr: keywords;
+  public get query(): any {
+    return this._query;
+  }
 
-    constructor(query: any, queryStr: keywords){
+  public set queryStr(queryStr: keywords) {
+    this._queryStr = queryStr;
+  }
 
-        this._query = query;
-        this._queryStr = queryStr
+  public get queryStr(): keywords {
+    return this._queryStr;
+  }
 
-    }
+  public search() {
+    const keyword = this.queryStr.keyword ? {
+      name: {
+        $regex: this.queryStr.keyword,
+        $options: 'i', // case insensitive
+      },
+    } : {};
 
-    public set query(query: any){
-        this._query = query
-    }
+    this.query = this.query.find({ ...keyword });
+    return this;
+  }
 
-    public get query(): any {
-        return this._query;
-    }
+  public pagination(resPerPage: number) {
+    const currentPage = Number(this.queryStr.page) || 1;
 
-    public set queryStr(queryStr: keywords) {
-        this._queryStr = queryStr;
-    }
+    const skip = resPerPage * (currentPage - 1);
 
-    public get queryStr(): keywords {
-        return this._queryStr;
-    }
+    this.query = this.query.limit(resPerPage).skip(skip);
+    return this;
+  }
 
+  public filter() {
+    const query = { ...this.queryStr };
 
+    const removeFields = ['keyword', 'limit', 'page'];
 
-    /**
-     * search using $regex Provides regular expression capabilities for pattern matching strings in queries.
-     */
+    removeFields.forEach((el) => delete query[el]);
 
-    public search() {
-        const keyword = this.queryStr.keyword ? {
-            name: {
-                $regex: this.queryStr.keyword,
-                $options: 'i' //case insensitive
-            }
-        } : {}
+    let queryStr = JSON.stringify(query);
+    queryStr = queryStr.replace(/\b(gt|gte|lt|lte)\b/g, (match) => `$${match}`); // gt = greater,  gte = greater equal
 
-        this.query = this.query.find({...keyword});
-        return this;
-    }
+    this.query = this.query.find(JSON.parse(queryStr));
 
-    public pagination(resPerPage: number) {
-
-        const currentPage = Number(this.queryStr.page) || 1;
-
-        const skip = resPerPage  * (currentPage  - 1);
-
-        this.query = this.query.limit(resPerPage).skip(skip);
-        return this;
-    }
-
-    public filter(){
-
-        const query = { ...this.queryStr};
-        
-        const removeFields = ['keyword', 'limit', 'page'];
-
-        removeFields.forEach(el => delete query[el]);
-
-        let queryStr = JSON.stringify(query);
-        queryStr = queryStr.replace(/\b(gt|gte|lt|lte)\b/g, match => `$${match}`); //gt = greater,  gte = greater equal 
-
-        this.query = this.query.find(JSON.parse(queryStr));
-
-        return this;
-    }
-    
+    return this;
+  }
 }

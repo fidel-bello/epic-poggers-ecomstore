@@ -1,13 +1,18 @@
-import mongoose, { Schema } from "mongoose";
-import bcrypt from "bcrypt";
-import jwt from "jsonwebtoken";
+/* eslint-disable no-underscore-dangle */
+/* eslint-disable no-return-await */
+/* eslint-disable func-names */
+/* eslint-disable no-unused-vars */
+/* eslint-disable no-shadow */
+/* eslint-disable no-useless-escape */
+import mongoose, { Schema } from 'mongoose';
+import bcrypt from 'bcrypt';
+import jwt from 'jsonwebtoken';
 import crypto from 'crypto';
 
 const validateEmail = (email: string) => {
-
-    const validators = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-    return validators.test(email);
-}
+  const validators = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+  return validators.test(email);
+};
 
 export enum Role
 {
@@ -17,40 +22,46 @@ export enum Role
 
 const userSchema: Schema = new mongoose.Schema({
 
-    name: { type: String, required: [true, 'Please enter your name'], maxlength: [50, 'Name exceeded amount of allowed characters']},
-    email: { type: String, required: [true, 'Please enter your email'], unique: true, validate: [validateEmail, 'Please enter a valid email']},
-    password: { type: String, required: [true, 'You must enter a password'], minlength: [6, 'Password must exceed 6 characters'], select: false },
-    role: { type: String, enum: Object.values(Role), default: Role.User, required: true },
-    createdAt: { type: Date, default: Date.now },
+  name: { type: String, required: [true, 'Please enter your name'], maxlength: [50, 'Name exceeded amount of allowed characters'] },
+  email: {
+    type: String, required: [true, 'Please enter your email'], unique: true, validate: [validateEmail, 'Please enter a valid email'],
+  },
+  password: {
+    type: String, required: [true, 'You must enter a password'], minlength: [6, 'Password must exceed 6 characters'], select: false,
+  },
+  role: {
+    type: String, enum: Object.values(Role), default: Role.User, required: true,
+  },
+  createdAt: { type: Date, default: Date.now },
 
-    resetPasswordToken: String,
-    resetPasswordExpire: Date
+  resetPasswordToken: String,
+  resetPasswordExpire: Date,
 });
 
-userSchema.pre('save', async function(next) {
-    if(!this.isModified('password')){
-        next();
-    }
-    this.password = await bcrypt.hash(this.password, 10);
-})
+userSchema.pre('save', async function (next) {
+  if (!this.isModified('password')) {
+    next();
+  }
+  this.password = await bcrypt.hash(this.password, 10);
+});
 
-//compare
-userSchema.methods.comparePassword = async function(enteredpassword: string) {
-    return await bcrypt.compare(enteredpassword, this.password);
-}
+// compare
+userSchema.methods.comparePassword = async function (enteredpassword: string) {
+  return await bcrypt.compare(enteredpassword, this.password);
+};
 
-//return jwt token
-userSchema.methods.getToken = function() {
-    return jwt.sign({ id: this._id }, process.env.JWT_SECRET, {
-        expiresIn: process.env.JWT_EXPIRATION
-    })
-}
+// return jwt token
+userSchema.methods.getToken = function () {
+  return jwt.sign({ id: this._id }, process.env.JWT_SECRET, {
+    expiresIn: process.env.JWT_EXPIRATION,
+  });
+};
 
-userSchema.methods.generateResetPassowrd = function() {
-    const resetToken = crypto.randomBytes(20).toString('hex');
-    this.resetPasswordToken = crypto.createHash('sha256').update(resetToken).digest('hex');
-    this.resetPasswordExpire = Date.now() + 30 * 60 * 1000;
-    return resetToken;
-}
+userSchema.methods.generateResetPassowrd = function () {
+  const resetToken = crypto.randomBytes(20).toString('hex');
+  this.resetPasswordToken = crypto.createHash('sha256').update(resetToken).digest('hex');
+  this.resetPasswordExpire = Date.now() + 30 * 60 * 1000;
+  return resetToken;
+};
 
 export const User = mongoose.model('User', userSchema);
