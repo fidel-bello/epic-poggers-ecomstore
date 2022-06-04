@@ -1,6 +1,7 @@
+/* eslint-disable camelcase */
 import express from 'express';
-import product_router from "./productRoutes";
-import auth_router from "./authRoutes";
+import product_router from './productRoutes';
+import auth_router from './authRoutes';
 import order_router from './orderRoutes';
 
 const router = express.Router();

@@ -1,8 +1,12 @@
+/* eslint-disable no-console */
+/* eslint-disable no-underscore-dangle */
+/* eslint-disable max-len */
+/* eslint-disable camelcase */
 import express from 'express';
 import cors from 'cors';
+import cookieParser from 'cookie-parser';
 import errors from '../middlewares/errors';
 import { Error_Handler } from '../utils/errorHandling';
-import cookieParser from 'cookie-parser'
 
 // import { Core } from '../framework';
 // Core.App = Core.Application.ApplicationCreate({appName: 'ecom'});
@@ -10,20 +14,25 @@ import cookieParser from 'cookie-parser'
 const expressApp = express();
 expressApp.use(cors());
 expressApp.use(cookieParser());
-expressApp.use(express.urlencoded({extended: true}));
+expressApp.use(express.urlencoded({ extended: true }));
 expressApp.use(express.json());
-
 
 export class HttpServer {
   private app = expressApp;
+
   private _router: express.Router;
+
   private _port: string;
+
   private _jwt: string;
+
   private _jwtExpiration: string;
+
   private _nodeEnv: string;
+
   private _middlewares = errors;
 
-  constructor(port: string, nodeEnv: string, jwt:string, jwtExpiration: string,  router: express.Router) {
+  constructor(port: string, nodeEnv: string, jwt:string, jwtExpiration: string, router: express.Router) {
     this._port = port;
     this._jwt = jwt;
     this._jwtExpiration = jwtExpiration;
@@ -39,7 +48,7 @@ export class HttpServer {
   public get port(): string {
     return this._port;
   }
-  
+
   public set router(router: express.Router) {
     this._router = router;
     this.useRouter();
@@ -49,7 +58,7 @@ export class HttpServer {
     return this._router;
   }
 
-  public set nodeEnv(nodeEnv: string){
+  public set nodeEnv(nodeEnv: string) {
     this._nodeEnv = nodeEnv;
   }
 
@@ -79,21 +88,18 @@ export class HttpServer {
   }
 
   public init() {
-    
     const server = this.app.listen(this.port, () => {
       console.log(`Listening on port ${this.port} in ${this.nodeEnv} mode\n`);
-    })
+    });
 
     process.on('unhandledRejection', (err: Error_Handler) => {
-
-      //unhandled promise rejection immediately shut down server
+      // unhandled promise rejection immediately shut down server
       console.log(`ERROR: ${err.stack}`);
       console.log('Server closing due to Unhandled Rejection');
 
       server.close(() => {
         process.exit(1);
-      })
-    })
+      });
+    });
   }
-
-};
+}
