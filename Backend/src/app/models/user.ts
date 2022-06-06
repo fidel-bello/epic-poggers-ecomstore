@@ -4,7 +4,12 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-shadow */
 /* eslint-disable no-useless-escape */
-import mongoose, { Schema } from 'mongoose';
+import {
+  Schema,
+  Document,
+  Model,
+  model,
+} from 'mongoose';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import crypto from 'crypto';
@@ -19,8 +24,19 @@ export enum Role
     Admin = 'admin',
     User = 'user',
 }
+export interface IUser extends Document {
+  name: string,
+  email: string,
+  password: string,
+  role: string,
+  createdAt: Date,
+  resetPasswordToken: string,
+  resetPasswordExpire: Date,
+  comparePassword(params: IUser): string,
+  generateResetPassowrd(): string
+}
 
-const userSchema: Schema = new mongoose.Schema({
+const userSchema: Schema = new Schema({
 
   name: { type: String, required: [true, 'Please enter your name'], maxlength: [50, 'Name exceeded amount of allowed characters'] },
   email: {
@@ -38,7 +54,7 @@ const userSchema: Schema = new mongoose.Schema({
   resetPasswordExpire: Date,
 });
 
-userSchema.pre('save', async function (next) {
+userSchema.pre<IUser>('save', async function (next) {
   if (!this.isModified('password')) {
     next();
   }
@@ -64,4 +80,4 @@ userSchema.methods.generateResetPassowrd = function () {
   return resetToken;
 };
 
-export const User = mongoose.model('User', userSchema);
+export const User: Model<IUser> = model('User', userSchema);

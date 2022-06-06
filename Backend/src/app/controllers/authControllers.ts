@@ -12,7 +12,7 @@ import cryto from 'crypto';
 import config from 'config';
 import asyncError from '../middlewares/asyncError';
 import { Error_Handler } from '../utils/errorHandling';
-import { User, Role } from '../models/user';
+import { User, Role, IUser } from '../models/user';
 import { sendEmail, sendToken } from '../middlewares/jwtToken';
 
 export class Auth_Controllers {
@@ -186,9 +186,6 @@ export class Auth_Controllers {
         message: `Email, sent to: ${user.email}`,
       });
     } catch (error) {
-      user.resetPasswordToken = undefined;
-      user.resetPasswordExpire = undefined;
-
       await user.save({ validateBeforeSave: false });
 
       return next(new Error_Handler(error.message, 500));
@@ -209,10 +206,6 @@ export class Auth_Controllers {
 
     user.password = req.body.password;
 
-    user.resetPasswordToken = undefined;
-
-    user.resetPasswordExpire = undefined;
-
     await user.save();
 
     sendToken(user, 200, res);
@@ -221,13 +214,13 @@ export class Auth_Controllers {
   public updatePassword = asyncError(async (req: any, res: Response, next: NextFunction) => {
     const user = await User.findById(req.user.id).select('+password');
 
-    const match = await user.comparePassword(req.body.oldPassword); // compare passwords
+    const match = user!.comparePassword(req.body.oldPassword); // compare passwords
 
     if (!match) return next(new Error_Handler('Old Password is incorrect', 400));
 
-    user.password = req.body.password; // password is new input
+    user!.password = req.body.password; // password is new input
 
-    await user.save();
+    await user!.save();
 
     sendToken(user, 200, res);
   });
