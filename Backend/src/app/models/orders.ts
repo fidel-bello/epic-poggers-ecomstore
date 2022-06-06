@@ -3,7 +3,6 @@ import mongoose, {
   Model,
   model,
   Document,
-  Types,
 } from 'mongoose';
 import { IProducts } from './product';
 import { IUser } from './user';
@@ -17,7 +16,7 @@ export interface IOrder extends Document {
     country: string
   },
   user: IUser['_id'],
-  orderItems: Types.Array<orderItems>,
+  orderItems: orderItems[],
   paymentInfo: {
     id: string,
     status: string,
@@ -31,12 +30,13 @@ export interface IOrder extends Document {
   deliveredAt: Date,
   createdAt: Date
 }
-export interface orderItems {
+
+export interface orderItems extends IOrder {
   name: string,
   quantity: number,
   image: string,
   price: number,
-  product: IProducts['_id']
+  product: IProducts['_id'],
 }
 
 const orderSchema: Schema = new Schema({
@@ -67,7 +67,7 @@ const orderSchema: Schema = new Schema({
   shippingPrice: { type: Number, required: true, default: 0.0 },
   totalPrice: { type: Number, required: true, default: 0.0 },
   orderStatus: { type: String, required: true, default: 'Processing' },
-  deliveredAt: { type: Number },
+  deliveredAt: { type: Date },
   createdAt: { type: Date, default: Date.now },
 });
 
