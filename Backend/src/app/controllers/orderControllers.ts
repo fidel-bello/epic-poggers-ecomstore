@@ -21,7 +21,6 @@ export class Order_Controllers {
       totalPrice,
       paymentInfo,
     } = req.body;
-
     const createOrd = await Order.create({
       orderItems,
       shippingInfo,
@@ -33,7 +32,6 @@ export class Order_Controllers {
       paidAt: Date.now(),
       user: req.user._id,
     });
-
     res.status(200).json({
       success: true,
       createOrd,
