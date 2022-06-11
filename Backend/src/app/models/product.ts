@@ -1,33 +1,9 @@
 /* eslint-disable object-property-newline */
 /* eslint-disable object-curly-spacing */
 /* eslint-disable object-curly-newline */
-import {Schema, Document, Model, model, Types} from 'mongoose';
-import { IUser } from './user';
+import {Schema, Model, model, Types} from 'mongoose';
+import { IProducts } from '../interface/Iproducts';
 
-export interface IProducts extends Document {
-  name: string;
-  price: number;
-  description: string;
-  ratings: number;
-  images: Types.DocumentArray<images>;
-  category: string;
-  seller: string;
-  stock: number;
-  numOfReviews: number;
-  reviews: reviews[];
-  user: IUser['_id'];
-  createdAt: Date;
-}
-interface images {
-  public_id: string;
-  url: string;
-}
-interface reviews {
-  user: IUser['_id'];
-  name: string;
-  rating: number;
-  comment: string
-}
 const productSchema: Schema = new Schema({
   name: { type: String, required: [true, 'Please enter product name'], trim: true, maxLength: [100, 'Product name cannot exceed 100 characters'] },
   price: { type: Number, required: [true, 'Please enter product price'], maxLength: [5, 'Product name cannot exceed 5 characters'], default: 0.0 },
@@ -65,11 +41,11 @@ const productSchema: Schema = new Schema({
       user: { type: Types.ObjectId, ref: 'User', required: true },
       name: { type: String, required: true },
       rating: { type: Number, required: true },
-      comment: { type: String, required: true },
+      comment: { type: String, required: true }
     },
   ],
   user: { type: Types.ObjectId, ref: 'User', required: true },
-  createdAt: { type: Date, default: Date.now },
+  createdAt: { type: Date, default: Date.now }
 });
 
 export const Product: Model<IProducts> = model('Product', productSchema);

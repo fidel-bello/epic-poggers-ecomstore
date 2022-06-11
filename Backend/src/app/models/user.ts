@@ -1,4 +1,3 @@
-/* eslint-disable no-underscore-dangle */
 /* eslint-disable no-return-await */
 /* eslint-disable func-names */
 /* eslint-disable no-unused-vars */
@@ -6,13 +5,13 @@
 /* eslint-disable no-useless-escape */
 import {
   Schema,
-  Document,
   Model,
   model,
 } from 'mongoose';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import crypto from 'crypto';
+import { IUser } from '../interface/Iuser';
 
 const validateEmail = (email: string) => {
   const validators = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
@@ -23,17 +22,6 @@ export enum Role
 {
     Admin = 'admin',
     User = 'user',
-}
-export interface IUser extends Document {
-  name: string,
-  email: string,
-  password: string,
-  role: string,
-  createdAt: Date,
-  resetPasswordToken: string,
-  resetPasswordExpire: Date,
-  comparePassword(params: IUser): string,
-  generateResetPassowrd(): string
 }
 
 const userSchema: Schema = new Schema({
