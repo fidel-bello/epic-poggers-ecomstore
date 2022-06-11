@@ -11,7 +11,7 @@ export interface IProducts extends Document {
     seller: string;
     stock: number;
     numOfReviews: number;
-    reviews: reviews[];
+    reviews: Types.DocumentArray<reviews>;
     user: IUser['_id'];
     createdAt: Date;
   }
@@ -19,9 +19,9 @@ export interface IProducts extends Document {
     public_id: string;
     url: string;
   }
-  interface reviews {
+interface reviews {
     user: IUser['_id'];
     name: string;
     rating: number;
-    comment: string
+    comment: string;
 }
