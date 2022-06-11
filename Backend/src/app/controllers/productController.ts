@@ -69,7 +69,7 @@ export class Product_Controllers {
     });
   });
 
-  public createReview = asyncError(async (req: any, res: Response, next: NextFunction) => {
+  public createReview = asyncError(async (req: any, res: Response, next: NextFunction): Promise<void> => {
     const {
       comment,
       productId,
@@ -100,6 +100,14 @@ export class Product_Controllers {
     await product.save({ validateBeforeSave: false });
     res.status(200).json({
       success: true
+    });
+  });
+
+  public getReviews = asyncError(async (req: any, res: Response, _next: NextFunction):Promise<void> => {
+    const product = await Product.findById(req.query.id) as IProducts;
+    res.status(200).json({
+      success: true,
+      reviews: product.reviews
     });
   });
 }
