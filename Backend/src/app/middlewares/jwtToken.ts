@@ -46,7 +46,7 @@ export const sendEmail = async (options: { email: string; subject: string; messa
 };
 
 export async function updateStock(id: string, quantity: number) {
-  const product: IProducts = await Product.findById(id) as IProducts;
+  const product = await Product.findById(id) as IProducts;
   product.stock -= quantity;
   await product.save({ validateBeforeSave: false });
 }
