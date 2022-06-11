@@ -20,5 +20,7 @@ router.route('/admin/products/:id')
 
 router.route('/admin/products/new').post(User.isAuthenticated, User.authorizeRoles(admin), Product.createProducts);
 router.route('/review').put(User.isAuthenticated, Product.createReview);
-router.route('/reviews').get(User.isAuthenticated, Product.getReviews);
+router.route('/reviews')
+  .get(User.isAuthenticated, Product.getReviews)
+  .delete(User.isAuthenticated, Product.deleteReviews);
 export default router;

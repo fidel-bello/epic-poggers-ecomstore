@@ -74,12 +74,14 @@ export class Product_Controllers {
       comment,
       productId,
       rating,
+      _id
     } = req.body;
     const review = {
       user: req.user._id,
       name: req.user.name,
       rating: Number(rating),
-      comment
+      comment,
+      _id
     };
     const product = await Product.findById(productId) as IProducts;
     const isReviewed = product.reviews.find((reviews) => reviews.user.toString() === req.user._id.toString());
@@ -108,6 +110,29 @@ export class Product_Controllers {
     res.status(200).json({
       success: true,
       reviews: product.reviews
+    });
+  });
+
+  public deleteReviews = asyncError(async (req: Request, res: Response, _next: NextFunction): Promise<void> => {
+    const product = await Product.findById(req.query.productid) as IProducts;
+    const reviews = product.reviews.filter((review) => review._id!.toString() !== req.query.id?.toString());
+    const numOfReviews = reviews.length;
+    const ratings = product.reviews.reduce((acc, item) => item.rating + acc, 0) / reviews.length;
+    await Product.findByIdAndUpdate(
+      req.query.productid,
+      {
+        reviews,
+        ratings,
+        numOfReviews,
+      },
+      {
+        new: true,
+        runValidators: true,
+        useFindAndModify: false
+      }
+    );
+    res.status(200).json({
+      success: true
     });
   });
 }
