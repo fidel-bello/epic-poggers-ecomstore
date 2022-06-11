@@ -3,7 +3,8 @@
 import { Response } from 'express';
 import nodemailer from 'nodemailer'; // https://nodemailer.com/usage/ great for sending mail ... using mailtrap as a sandbox
 import { Auth_Controllers } from '../controllers/authControllers';
-import { IProducts, Product } from '../models/product';
+import { Product } from '../models/product';
+import { IProducts } from '../interface/Iproducts';
 
 export const sendToken = (user: any, statusCode: number, res: Response) => {
   const token = user.getToken();
