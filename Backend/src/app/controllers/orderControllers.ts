@@ -1,3 +1,5 @@
+/* eslint-disable no-sequences */
+/* eslint-disable no-unused-expressions */
 /* eslint-disable operator-assignment */
 /* eslint-disable class-methods-use-this */
 /* eslint-disable consistent-return */
@@ -9,10 +11,12 @@ import { NextFunction, Response, Request } from 'express';
 import { Order } from '../models/orders';
 import asyncError from '../middlewares/asyncError';
 import { Error_Handler } from '../utils/errorHandling';
+import { updateStock } from '../middlewares/jwtToken';
 
 export class Order_Controllers {
   public createOrder = asyncError(async (req: any, res: Response, _next: NextFunction): Promise<void> => {
     const {
+      // eslint-disable-next-line no-shadow
       orderItems,
       shippingInfo,
       itemsPrice,
@@ -72,12 +76,12 @@ export class Order_Controllers {
 
   public updateProcessOrders = asyncError(async (req: Request, res: Response, next: NextFunction) => {
     const order = await Order.findById(req.params.id);
-    if (order.orderStatus === 'Delivered') {
-      return next(new Error_Handler('Order already has been delivered', 400));
-    }
-    order.orderStatus = req.body.status;
-    order.deliveredAt = Date.now();
-    await order.save();
+    if (order!.orderStatus === 'Delivered') return next(new Error_Handler('Already Delivered', 400));
+    order?.orderItems.forEach(async (item) => {
+      await updateStock(item.product, item.quantity);
+    });
+    (order!.orderStatus = req.body.status), (order!.deliveredAt = new Date(Date.now()));
+    await order!.save();
     res.status(200).json({
       success: true,
     });
@@ -85,9 +89,7 @@ export class Order_Controllers {
 
   public deleteOrder = asyncError(async (req: Request, res: Response, next: NextFunction) => {
     const order = await Order.findById(req.params.id);
-    if (!order) {
-      return next(new Error_Handler('Order is not found', 404));
-    }
+    if (!order) return next(new Error_Handler('Order is not found', 404));
     await order.remove();
     res.status(200).json({
       sucess: true,
