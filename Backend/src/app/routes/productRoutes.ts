@@ -19,5 +19,5 @@ router.route('/admin/products/:id')
   .delete(User.isAuthenticated, User.authorizeRoles(admin), Product.deleteProduct); // could be wrong format? did this because the admin product id route is used twice
 
 router.route('/admin/products/new').post(User.isAuthenticated, User.authorizeRoles(admin), Product.createProducts);
-
+router.route('/review').put(User.isAuthenticated, Product.createReview);
 export default router;

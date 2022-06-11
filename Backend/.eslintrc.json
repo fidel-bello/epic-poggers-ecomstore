@@ -27,6 +27,11 @@
         }
     },
     "rules": {
+        "comma-dangle": 0,
+        "no-underscore-dangle": 0,
+        "max-len": 0,
+        "camelcase": 0,
+        "no-param-reassign": [2, {"props": false}],
         "no-use-before-define": "off",
         "@typescript-eslint/no-use-before-define": ["warn"],
         "import/extensions": "off",
