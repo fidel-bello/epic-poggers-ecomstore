@@ -3,6 +3,7 @@
 import { Response } from 'express';
 import nodemailer from 'nodemailer'; // https://nodemailer.com/usage/ great for sending mail ... using mailtrap as a sandbox
 import { Auth_Controllers } from '../controllers/authControllers';
+import { IProducts, Product } from '../models/product';
 
 export const sendToken = (user: any, statusCode: number, res: Response) => {
   const token = user.getToken();
@@ -43,3 +44,9 @@ export const sendEmail = async (options: { email: string; subject: string; messa
 
   await transport.sendMail(message);
 };
+
+export async function updateStock(id: string, quantity: number) {
+  const product: IProducts = await Product.findById(id) as IProducts;
+  product.stock -= quantity;
+  await product.save({ validateBeforeSave: false });
+}

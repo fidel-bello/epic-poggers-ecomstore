@@ -11,13 +11,8 @@ import { NextFunction, Response, Request } from 'express';
 import { Order } from '../models/orders';
 import asyncError from '../middlewares/asyncError';
 import { Error_Handler } from '../utils/errorHandling';
-import { IProducts, Product } from '../models/product';
+import { updateStock } from '../middlewares/jwtToken';
 
-async function updateStock(id: string, quantity: number) {
-  const product: IProducts = await Product.findById(id) as IProducts;
-  product.stock = product.stock - quantity;
-  await product.save({ validateBeforeSave: false });
-}
 export class Order_Controllers {
   public createOrder = asyncError(async (req: any, res: Response, _next: NextFunction): Promise<void> => {
     const {
@@ -94,9 +89,7 @@ export class Order_Controllers {
 
   public deleteOrder = asyncError(async (req: Request, res: Response, next: NextFunction) => {
     const order = await Order.findById(req.params.id);
-    if (!order) {
-      return next(new Error_Handler('Order is not found', 404));
-    }
+    if (!order) return next(new Error_Handler('Order is not found', 404));
     await order.remove();
     res.status(200).json({
       sucess: true,
