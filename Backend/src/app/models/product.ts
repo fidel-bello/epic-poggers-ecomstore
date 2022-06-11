@@ -14,7 +14,7 @@ export interface IProducts extends Document {
   seller: string;
   stock: number;
   numOfReviews: number;
-  reviews: Types.DocumentArray<reviews>;
+  reviews: reviews[];
   user: IUser['_id'];
   createdAt: Date;
 }

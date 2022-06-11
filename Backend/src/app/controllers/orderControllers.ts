@@ -1,12 +1,8 @@
 /* eslint-disable no-sequences */
 /* eslint-disable no-unused-expressions */
-/* eslint-disable operator-assignment */
 /* eslint-disable class-methods-use-this */
 /* eslint-disable consistent-return */
-/* eslint-disable no-underscore-dangle */
 /* eslint-disable no-unused-vars */
-/* eslint-disable max-len */
-/* eslint-disable camelcase */
 import { NextFunction, Response, Request } from 'express';
 import { Order } from '../models/orders';
 import asyncError from '../middlewares/asyncError';

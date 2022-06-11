@@ -1,10 +1,7 @@
 /* eslint-disable class-methods-use-this */
 /* eslint-disable consistent-return */
 /* eslint-disable no-unused-vars */
-/* eslint-disable max-len */
-/* eslint-disable no-underscore-dangle */
 /* eslint-disable import/no-cycle */
-/* eslint-disable camelcase */
 import { NextFunction, Request, Response } from 'express';
 import jwt from 'jsonwebtoken';
 import cryto from 'crypto';
@@ -12,7 +9,7 @@ import cryto from 'crypto';
 import config from 'config';
 import asyncError from '../middlewares/asyncError';
 import { Error_Handler } from '../utils/errorHandling';
-import { User, Role, IUser } from '../models/user';
+import { User, Role } from '../models/user';
 import { sendEmail, sendToken } from '../middlewares/jwtToken';
 
 export class Auth_Controllers {
