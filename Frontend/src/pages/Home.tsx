@@ -40,7 +40,7 @@ export default function Home() {
       { isLoading ? (
         <div>
           loading..
-          {/* will put a spinner around here for loading purposes */}
+          {/* TODO .will put a spinner around here for loading purposes, need a better spinner */}
         </div>
       ) : (
 
